@@ -7,19 +7,40 @@
 			<div class="card product-card">
 			  <div class="card-header">Product Name</div>
 			  <div class="card-body">
-			    <p class="card-text">Product Price</p>
+			  	<div class="row justify-content-between">
+			  		<div class="col">
+			  			<p class="card-text">Product Price: xD</p>
+			  		</div>
+			  		<div class="col">
+			  			<p class="card-text">Product Quantity: xD</p>
+			  		</div>
+			  	</div>
 			  </div>
 			</div>
 			<div class="card product-card">
 			  <div class="card-header">Product Name</div>
 			  <div class="card-body">
-			    <p class="card-text">Product Price</p>
+			    <div class="row justify-content-between">
+			  		<div class="col">
+			  			<p class="card-text">Product Price: xD</p>
+			  		</div>
+			  		<div class="col">
+			  			<p class="card-text">Product Quantity: xD</p>
+			  		</div>
+			  	</div>
 			  </div>
 			</div>
 			<div class="card product-card">
 			  <div class="card-header">Product Name</div>
 			  <div class="card-body">
-			    <p class="card-text">Product Price</p>
+			    <div class="row justify-content-between">
+			  		<div class="col">
+			  			<p class="card-text">Product Price: xD</p>
+			  		</div>
+			  		<div class="col">
+			  			<p class="card-text">Product Quantity: xD</p>
+			  		</div>
+			  	</div>
 			  </div>
 			</div>
 		</div>
