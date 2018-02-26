@@ -53,6 +53,43 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	
+	<div class="row justify-content-center product-card">
+		<div class="col-lg-10">
+		<h1>Your Orders:</h1>
+			<table class="table" id="orders-list">
+			  <thead>
+			    <tr>
+			      <th scope="col">Order#</th>
+			      <th scope="col">Name</th>
+			      <th scope="col">Price</th>
+			      <th scope="col">Quantity</th>
+			      <th></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr>
+			      <td>1109</td>
+			      <td>Product 1</td>
+			      <td>$100</td>
+			      <td>4</td>
+			      <td>
+			      	<a href="#" class="btn btn-warning">Process</a>
+			      </td>
+			    </tr>
+			    <tr>
+			      <td>3333</td>
+			      <td>Product 66</td>
+			      <td>$333</td>
+			      <td>6</td>
+			      <td>
+			      	<a href="#" class="btn btn-warning">Process</a>
+			      </td>
+			    </tr>		    
+			  </tbody>
+			</table>
+		</div>
 		
 	</div>
 </div>
