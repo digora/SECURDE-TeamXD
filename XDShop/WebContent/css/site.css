@@ -10,7 +10,7 @@ body {
   }
 }
 
-#login-container{
+.form-container{
 	padding-top: 100px !important;
 	padding-bottom: 100px !important;
 }
