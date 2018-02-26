@@ -19,6 +19,9 @@
               <a class="nav-link" href="#">Contact</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="#">Account</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="#">View Cart</a>
             </li>
             <li class="nav-item">
