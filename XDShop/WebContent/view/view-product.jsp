@@ -17,7 +17,16 @@
           <h3 class="card-title">Product Name</h3>
           <h4>$24.99</h4>
           <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
-	      <div class="row justify-content-center">
+	      <div class="row justify-content-between px-3" >
+	      	<div class="col-lg-*">
+	      		<div class="form-row">
+			      <select id="quantity" class="form-control">
+			        <option selected>1</option>
+			        <option>2</option>
+			        <option>3</option>
+			      </select>
+	      		</div>
+	      	</div>
 	      	<div class="col-lg-*">
 	      		<!-- Should return pop-up: Item added to cart. -->
 	      		<a href="#" class="btn btn-success">Purchase</a>
