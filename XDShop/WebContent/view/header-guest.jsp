@@ -24,6 +24,9 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Sign up</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">PM Sign up</a>
+            </li>
           </ul>
         </div>
       </div>
