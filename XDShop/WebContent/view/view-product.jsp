@@ -20,11 +20,7 @@
 	      <div class="row justify-content-between px-3" >
 	      	<div class="col-lg-*">
 	      		<div class="form-row">
-			      <select id="quantity" class="form-control">
-			        <option selected>1</option>
-			        <option>2</option>
-			        <option>3</option>
-			      </select>
+			      <input type="number" name="Quantity" min="1" max="5" value="1">
 	      		</div>
 	      	</div>
 	      	<div class="col-lg-*">

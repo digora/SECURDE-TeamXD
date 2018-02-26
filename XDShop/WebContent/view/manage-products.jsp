@@ -10,6 +10,7 @@
 			      <th scope="col">ID</th>
 			      <th scope="col">Name</th>
 			      <th scope="col">Price</th>
+			      <th scope="col">Stock</th>
 			      <th></th>
 			    </tr>
 			  </thead>
@@ -17,7 +18,8 @@
 			    <tr>
 			      <th scope="row">1</th>
 			      <td>Product 1</td>
-			      <td>100</td>
+			      <td>$100</td>
+			      <td>10</td>
 			      <td>
 			      	<a href="#" class="btn btn-primary">Edit</a>
 			      	<a href="#" class="btn btn-danger">Delete</a>
@@ -26,7 +28,8 @@
 			    <tr>
 			      <th scope="row">2</th>
 			      <td>Product 2</td>
-			      <td>200</td>
+			      <td>$200</td>
+			      <td>5</td>
 			      <td>
 			      	<a href="#" class="btn btn-primary">Edit</a>
 			      	<a href="#" class="btn btn-danger">Delete</a>
@@ -35,7 +38,8 @@
 			    <tr>
 			      <th scope="row">3</th>
 			      <td>Product 3</td>
-			      <td>10</td>
+			      <td>$10</td>
+			      <td>35</td>
 			      <td>
 			      	<a href="#" class="btn btn-primary">Edit</a>
 			      	<a href="#" class="btn btn-danger">Delete</a>
