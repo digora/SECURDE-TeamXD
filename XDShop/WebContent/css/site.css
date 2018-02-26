@@ -9,3 +9,8 @@ body {
     padding-top: 56px;
   }
 }
+
+#login-container{
+	padding-top: 100px !important;
+	padding-bottom: 100px !important;
+}

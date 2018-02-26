@@ -17,11 +17,8 @@
 <body>
 <!-- Need to make dynamic when someone logs in -->
 <jsp:include page="view/header-guest.jsp"></jsp:include>
-
-	<!-- Browse Shop 
-	<jsp:include page="view/browse-shop.jsp"></jsp:include>-->
 	
-	
+	<jsp:include page="view/login.html"></jsp:include>
 	
 <jsp:include page="view/footer.html"></jsp:include>
 </body>
