@@ -19,14 +19,12 @@
               <a class="nav-link" href="#">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Login</a>
+              <a class="nav-link" href="#">Manage Products</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Sign up</a>
+              <a class="nav-link" href="#">Logout</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">PM Sign up</a>
-            </li>
+
           </ul>
         </div>
       </div>

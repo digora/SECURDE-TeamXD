@@ -1,0 +1,26 @@
+<div class="container form-container">
+
+	<div class="row justify-content-center">
+		<div class="col col-md-10">
+		<h1>Edit Product</h1>
+			  <div class="form-group">
+			    <label for="nameInput">Name</label>
+			    <input type="text" class="form-control" id="nameInput" placeholder="Name">
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="priceInput">Price</label>
+			    <input type="number" class="form-control" id="priceInput" min="0" max="999999999" placeholder="Price">
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="stockInput">Stock</label>
+			    <input type="number" class="form-control" id="stockInput" min="0" max="999999999" placeholder="Stock">
+			  </div>
+			  
+			  <button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
+
+</div>
