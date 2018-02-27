@@ -18,7 +18,7 @@
 			    <input type="number" class="form-control" id="stockInput" min="0" max="999999999" placeholder="Stock">
 			  </div>
 			  
-			  <button type="submit" class="btn btn-primary">Submit</button>
+			  <button type="submit" class="btn btn-primary" id="confirmEditBtn">Submit</button>
 			</form>
 		</div>
 	</div>

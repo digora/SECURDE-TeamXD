@@ -21,8 +21,8 @@
 			      <td>$100</td>
 			      <td>10</td>
 			      <td>
-			      	<a href="#" class="btn btn-primary">Edit</a>
-			      	<a href="#" class="btn btn-danger">Delete</a>
+			      	<a href="#" class="btn btn-primary" id="btnEditProd">Edit</a>
+			      	<a href="#" class="btn btn-danger" id="btnDeleteProd">Delete</a>
 			      </td>
 			    </tr>
 			    <tr>
@@ -31,8 +31,8 @@
 			      <td>$200</td>
 			      <td>5</td>
 			      <td>
-			      	<a href="#" class="btn btn-primary">Edit</a>
-			      	<a href="#" class="btn btn-danger">Delete</a>
+			      	<a href="#" class="btn btn-primary" id="btnEditProd1">Edit</a>
+			      	<a href="#" class="btn btn-danger" id="btnDeleteProd1">Delete</a>
 			      </td>
 			    </tr>
 			    <tr>
@@ -41,15 +41,15 @@
 			      <td>$10</td>
 			      <td>35</td>
 			      <td>
-			      	<a href="#" class="btn btn-primary">Edit</a>
-			      	<a href="#" class="btn btn-danger">Delete</a>
+			      	<a href="#" class="btn btn-primary" id="btnEditProd2">Edit</a>
+			      	<a href="#" class="btn btn-danger" id="btnDeleteProd2">Delete</a>
 			      </td>
 			    </tr>
 			  </tbody>
 			</table>
 			<div class="row justify-content-end">
 				<div class="col">
-					<a href="#" class="btn btn-success btn-block">Add Product</a>
+					<a href="#" class="btn btn-success btn-block" id="addProdBtn">Add Product</a>
 				</div>
 			</div>
 		</div>
@@ -75,7 +75,7 @@
 			      <td>$100</td>
 			      <td>4</td>
 			      <td>
-			      	<a href="#" class="btn btn-warning">Process</a>
+			      	<a href="#" class="btn btn-warning" id="btnProcess">Process</a>
 			      </td>
 			    </tr>
 			    <tr>
@@ -84,7 +84,7 @@
 			      <td>$333</td>
 			      <td>6</td>
 			      <td>
-			      	<a href="#" class="btn btn-warning">Process</a>
+			      	<a href="#" class="btn btn-warning" id="btnProcessTwo">Process</a>
 			      </td>
 			    </tr>		    
 			  </tbody>

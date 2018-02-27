@@ -25,7 +25,7 @@
 	      	</div>
 	      	<div class="col-lg-*">
 	      		<!-- Should return pop-up: Item added to cart. -->
-	      		<a href="#" class="btn btn-success">Purchase</a>
+	      		<a href="#" class="btn btn-success" id="btnPurchase">Purchase</a>
 	      	</div>
 	      </div>
         </div>

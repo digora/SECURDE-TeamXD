@@ -9,7 +9,7 @@
 			    <input type="date" class="form-control" id="dDateInput">
 			  </div>
 			  
-			  <button type="submit" class="btn btn-primary">Finish</button>
+			  <button type="submit" class="btn btn-primary" id="btnFinish">Finish</button>
 			</form>
 		</div>
 	</div>
