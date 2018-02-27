@@ -11,7 +11,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import model.DBConnection;
+import Model.DBConnection;
 
 //TODO import cart
 public class CartHelper {
