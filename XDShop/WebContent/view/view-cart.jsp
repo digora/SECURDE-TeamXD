@@ -5,7 +5,16 @@
 		<div class="col-lg-10">
 		<!-- Dynamic list for adding products -->
 			<div class="card product-card">
-			  <div class="card-header">Product Name</div>
+			  <div class="card-header">
+				  <div class="row justify-content-between">
+				  		<div class="col-lg-*">
+				  			Product Name
+				  		</div>
+				  		<div class="col-lg-*">
+				  			<a href="#" class="btn btn-danger">-</a>
+				  		</div>
+				 </div>
+			  </div>
 			  <div class="card-body">
 			  	<div class="row justify-content-between">
 			  		<div class="col">
@@ -18,7 +27,16 @@
 			  </div>
 			</div>
 			<div class="card product-card">
-			  <div class="card-header">Product Name</div>
+			  <div class="card-header">
+			  	<div class="row justify-content-between">
+				  		<div class="col-lg-*">
+				  			Product Name
+				  		</div>
+				  		<div class="col-lg-*">
+				  			<a href="#" class="btn btn-danger">-</a>
+				  		</div>
+				 </div>
+			  </div>
 			  <div class="card-body">
 			    <div class="row justify-content-between">
 			  		<div class="col">
@@ -31,7 +49,16 @@
 			  </div>
 			</div>
 			<div class="card product-card">
-			  <div class="card-header">Product Name</div>
+			  <div class="card-header">
+			  	<div class="row justify-content-between">
+				  		<div class="col-lg-*">
+				  			Product Name
+				  		</div>
+				  		<div class="col-lg-*">
+				  			<a href="#" class="btn btn-danger">-</a>
+				  		</div>
+				 </div>
+			  </div>
 			  <div class="card-body">
 			    <div class="row justify-content-between">
 			  		<div class="col">

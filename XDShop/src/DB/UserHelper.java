@@ -27,6 +27,7 @@ public class UserHelper {
 		return User.toUser(rs);
 	}
 	
+	
 	public boolean register(User user, String password){
 		boolean check_If_Email_Is_Not_Taken_This_Variable_Is_So_Long_Lmao = false;
 		

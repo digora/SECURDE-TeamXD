@@ -7,6 +7,14 @@
         <div class="col-lg-3">
 
           <h1 class="my-4">XD Shop</h1>
+          <form>
+          	<div class="form-group">
+          		<label for="searchInput">Search</label>
+          		<input type="text" id="searchInput" class="form-control" placeholder="Search an Item">
+          	</div>
+          
+          </form>
+          
           <div class="list-group">
             <a href="#" class="list-group-item">Category 1</a>
             <a href="#" class="list-group-item">Category 2</a>
