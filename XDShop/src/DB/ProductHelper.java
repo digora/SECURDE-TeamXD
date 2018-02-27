@@ -87,6 +87,10 @@ public class ProductHelper {
 		}
 	}
 	
+	public Product[] getAllProducts(){
+		return getProductArr("SELECT * FROM products");
+	}
+	
 	public Product[] searchProducts(String searchName){
 		String query = "SELECT * FROM products WHERE prod_name LIKE '%"+searchName+"%'";
 		return getProductArr(query);
