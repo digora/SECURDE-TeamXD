@@ -25,7 +25,7 @@
 					      <td><b>Processing</b></td>
 					      <td>N/A</td>
 					      <td>
-					      	<a href="#" class="btn btn-danger">Cancel</a>
+					      	<a href="#" class="btn btn-danger" id="btnCancelOrder">Cancel</a>
 					      </td>
 					    </tr>
 					    <tr>
@@ -34,7 +34,7 @@
 					      <td><b>Delivered</b></td>
 					      <td>06/06/66</td>
 					      <td>
-					      	<a href="#" class="btn btn-danger">Cancel</a>
+					      	<a href="#" class="btn btn-danger" id="btnCancelOrder1">Cancel</a>
 					      </td>
 					    </tr>		    
 					  </tbody>

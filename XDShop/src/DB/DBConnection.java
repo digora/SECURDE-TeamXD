@@ -11,7 +11,7 @@ public class DBConnection {
 		
 		try {
 			Class.forName(driverName);
-			DriverManager.registerDriver(new com.mysql.jdbc.Driver ());
+			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 			Connection con = DriverManager
 					.getConnection(url + database, username, password);
 			System.out.println("DBConnection::Connection SUCCESS");

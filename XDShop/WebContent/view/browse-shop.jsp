@@ -12,7 +12,7 @@
           		<label for="searchInput">Search</label>
           		<input type="text" id="searchInput" class="form-control" placeholder="Search an Item">
           	</div>
-          
+          	<button type="submit" class="btn btn-primary" id="searchProdBtn">Search</button>
           </form>
           
           <div class="list-group">

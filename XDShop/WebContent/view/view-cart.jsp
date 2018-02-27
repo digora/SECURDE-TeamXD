@@ -11,7 +11,7 @@
 				  			Product Name
 				  		</div>
 				  		<div class="col-lg-*">
-				  			<a href="#" class="btn btn-danger">-</a>
+				  			<a href="#" class="btn btn-danger" id="btnRemoveFrCart">-</a>
 				  		</div>
 				 </div>
 			  </div>
@@ -33,7 +33,7 @@
 				  			Product Name
 				  		</div>
 				  		<div class="col-lg-*">
-				  			<a href="#" class="btn btn-danger">-</a>
+				  			<a href="#" class="btn btn-danger" id="btnRemoveFrCart1">-</a>
 				  		</div>
 				 </div>
 			  </div>
@@ -55,7 +55,7 @@
 				  			Product Name
 				  		</div>
 				  		<div class="col-lg-*">
-				  			<a href="#" class="btn btn-danger">-</a>
+				  			<a href="#" class="btn btn-danger" id="btnRemoveFrCart2">-</a>
 				  		</div>
 				 </div>
 			  </div>
@@ -81,7 +81,7 @@
 			</div>
 			<div class="row justify-content-end product-card">
 				<div class="col-sm-*">
-					<a href="#" class="btn btn-success">Check-out</a>
+					<a href="#" class="btn btn-success" id="btnCheckOut">Check-out</a>
 				</div>
 			</div>
 		</div>
