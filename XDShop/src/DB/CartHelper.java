@@ -2,16 +2,7 @@ package DB;
 
 import java.sql.*;
 import java.util.ArrayList;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.NoResultException;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-
-import Model.DBConnection;
+import Model.*;
 
 //TODO import cart
 public class CartHelper {
@@ -21,17 +12,65 @@ public class CartHelper {
 		dbc = new DBConnection();
 	}
 	
-	private Cart getCartForUser(int userId) {
-		String query = "SELECT c FROM cart c, users u WHERE u.user_id = " + userId + " AND c.user_id = " + userId;
+	private Cart[] getCartForUser(int userId) {
+		String query = "SELECT * FROM cart WHERE user_id = " + userId;
 		
 		return getCartFromQuery(query);
 	}
 	
-	private boolean checkoutCart(int userId) {
-		String query = "DELETE c FROM cart c, users u WHERE u.user_id = " + userId + " AND c.user_id = " + userId;
+	private boolean checkoutCart(int userId, String address) {
+		boolean success = false;
+		String query = "DELETE * FROM cart WHERE user_id = " + userId;
+		String query2 = "INSERT INTO order(u_id, date_created, address) VALUES("
+				+ userId + ", CURDATE(), '"
+				+ address + "')";
+		String query3 = "SELECT MAX(order_id) FROM order WHERE u_id = " + userId;
 		
-		return (getCartFromQuery(query).size == 0);
-		//if it's 0 successful checkout
+		Cart[] carts = getCartForUser(userId);
+		dbc.updateQuery(query2);
+		int order_id;
+		try{
+			order_id = dbc.executeQuery(query3).getInt("MAX(order_id)");
+			String query4 = "SELECT MAX(detail_id) FROM order_details WHERE orderid = "+order_id;
+			
+			for(Cart c : carts){
+				String query5 = "INSERT INTO order_details(orderid,product_id, qty) VALUES("
+						+ order_id + ", "
+						+ c.getPid() + ", "
+						+ c.getQty() + ")";
+				dbc.updateQuery(query5);
+				
+				int latestDetailId = dbc.executeQuery(query4).getInt("MAX(detail_id)");
+				
+				String query6 = "INSERT INTO order_status(date,status,detail_id) VALUES(CURDATE(),"
+						+ "'Order Placed', "
+						+ latestDetailId + ")";
+				
+				dbc.updateQuery(query6);
+			}
+			
+			dbc.updateQuery(query);
+			success = true;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return success;
+	}
+	
+	public void addItemToCart(Product p, int userId, int qty){
+		String query = "INSERT INTO cart(user_id, p_id, qty) VALUES("
+				+ p.getP_id() +","
+				+ userId + ","
+				+ qty + ")";
+		
+		dbc.updateQuery(query);
+	}
+	
+	public void removeItemFromCart(Product p, int userId){
+		String query = "DELETE FROM cart WHERE p_id = " + p.getPrice() + " AND user_id = " + userId;
+		
+		dbc.updateQuery(query);
 	}
 	
 	private Cart[] getCartFromQuery(String query) {
@@ -39,18 +78,10 @@ public class CartHelper {
 		ArrayList<Cart> tempArr = new ArrayList<>();
 		try{
 			ResultSet rs = dbc.executeQuery(query);
-			Cart cart = new Cart();
-			cart.setId(rs.getInt("user_id"));
 			while(rs.next()){
-				cart.setString(rs.getString("p_id"));
+				tempArr.add(Cart.toCart(rs));
 			}
-			
-			finalArr = new Cart[tempArr.size()];
-			
-			for(int i = 0 ; i < tempArr.size(); i ++){
-				finalArr[i] = tempArr.get(i);
-			}
-			
+			finalArr = (Cart[]) tempArr.toArray();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
