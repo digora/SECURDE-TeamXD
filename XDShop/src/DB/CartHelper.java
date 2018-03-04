@@ -31,7 +31,7 @@ public class CartHelper {
 	private boolean checkoutCart(int userId) {
 		String query = "DELETE c FROM cart c, users u WHERE u.user_id = " + userId + " AND c.user_id = " + userId;
 		
-		return (getCartFromQuery(query).size == 0);
+		return (getCartFromQuery(query).length == 0);
 		//if it's 0 successful checkout
 	}
 	
@@ -39,11 +39,13 @@ public class CartHelper {
 		Cart[] finalArr = null;
 		ArrayList<Cart> tempArr = new ArrayList<>();
 		try{
-			ResultSet rs = dbc.executeQuery(query);
-			Cart cart = new Cart();
-			cart.setId(rs.getInt("user_id"));
+			ResultSet rs = dbc.executeQuery(query);			
 			while(rs.next()){
-				cart.setString(rs.getString("p_id"));
+				Cart cart = new Cart();
+				cart.setUid(rs.getInt("user_id"));
+				cart.setPid((rs.getInt("p_id")));
+				cart.setQty((rs.getInt("qty")));
+				tempArr.add(cart);
 			}
 			
 			finalArr = new Cart[tempArr.size()];

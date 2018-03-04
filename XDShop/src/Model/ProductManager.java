@@ -13,10 +13,8 @@ public class ProductManager {
 	public ProductManager() {
 	};
 
-	public ProductManager(String username, String fname, String lname, String storeName){
+	public ProductManager(String username, String storeName){
 		 this.username = username;
-		 this.fname = fname;
-		 this.lname = lname;
 		 this.storeName = storeName;
 	}
 
@@ -53,10 +51,11 @@ public class ProductManager {
 	public static ProductManager toProductManager(ResultSet rs){
 		ProductManager pm = new ProductManager();
 		try{
-			pm.setUsername(rs.getString("username"));
-			pm.setFname(rs.getString("fname"));
-			pm.setLname(rs.getString("lname"));
-			pm.setStoreName(rs.getString("store_name"));
+			if(rs.next())
+			{
+				pm.setUsername(rs.getString("username"));
+				pm.setStoreName(rs.getString("store_name"));
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}

@@ -13,19 +13,19 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="#" id="navAbout">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" href="#" id="navContact">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Login</a>
+              <a class="nav-link" href="#" id="navLogin">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Sign up</a>
+              <a class="nav-link" href="#" id="navSignUp">Sign up</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">PM Sign up</a>
+              <a class="nav-link" href="#" id="navPMSignUp">PM Sign up</a>
             </li>
           </ul>
         </div>

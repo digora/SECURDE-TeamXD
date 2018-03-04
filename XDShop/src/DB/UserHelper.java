@@ -2,6 +2,7 @@ package DB;
 
 
 import java.sql.ResultSet;
+import java.util.Objects;
 
 import Model.User;
 
@@ -32,7 +33,7 @@ public class UserHelper {
 		
 		User u = getUserByUsername(user.getUsername());
 		
-		if(u!= null){
+		if(u != null){
 			check_If_Email_Is_Not_Taken_This_Variable_Is_So_Long_Lmao = true;
 			String query = "INSERT INTO users(fname, lname, username, password, credits) VALUES("
 					+ "'" + user.getFname() + "', "

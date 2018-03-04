@@ -11,8 +11,8 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import Model.DBConnection;
 import Model.ProductManager;
+import Model.User;
 
 //TODO import product manager
 public class ProductManagerHelper {
@@ -22,9 +22,16 @@ public class ProductManagerHelper {
 		dbc = new DBConnection();
 	}
 	
+	public ProductManager getProductManagerByUsername(String username){
+		String query = "SELECT * FROM product_manager WHERE username = '"+ username + "'";
+		ResultSet rs = dbc.executeQuery(query);
+		
+		return ProductManager.toProductManager(rs);
+	}
+	
 	private ProductManager login(String username, String password) {
 		String query = "SELECT p FROM product_manager p WHERE p.username = " + username + " AND u.password = " + password;
-		ResultSet rs = getProductManagerFromQuery(query);
+		ResultSet rs = dbc.executeQuery(query);
 		return ProductManager.toProductManager(rs);
 	}
 	
@@ -52,5 +59,22 @@ public class ProductManagerHelper {
 				e.printStackTrace();
 			}
 			return finalArr;
+	}
+
+	public boolean register(ProductManager pm, String pass) {
+		boolean check_If_Email_Is_Not_Taken_This_Variable_Is_So_Long_Lmao = false;
+		
+		ProductManager pmCheck = getProductManagerByUsername(pm.getUsername());
+		
+		if(pmCheck != null){
+			check_If_Email_Is_Not_Taken_This_Variable_Is_So_Long_Lmao = true;
+			String query = "INSERT INTO product_manager(username, password, store_name) VALUES("
+					+ "'" + pm.getUsername() + "', "
+					+ "'" + pass+ "', "
+					+ "'" + pm.getStoreName() + "');";
+			
+			dbc.updateQuery(query);
+		}
+		return check_If_Email_Is_Not_Taken_This_Variable_Is_So_Long_Lmao;
 	}
 }

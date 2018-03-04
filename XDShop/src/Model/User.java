@@ -45,15 +45,21 @@ public class User {
 		return lname;
 	}
 
-	
+	public String toJSONformat(){
+		String json = "{ \"username\":\""+username+"\", \"fname\":\""+fname+"\", \"lname\":\""+lname+"\", \"credits\":\""+credits+"\"}";
+		return json;
+	}
 	
 	public static User toUser(ResultSet rs){
 		User u = new User();
 		try{
-			u.setUsername(rs.getString("username"));
-			u.setFname(rs.getString("fname"));
-			u.setLname(rs.getString("lname"));
-			u.setCredits(rs.getDouble("credits"));
+			while(rs.next())
+			{
+				u.setFname(rs.getString("fname"));
+				u.setLname(rs.getString("lname"));
+				u.setUsername(rs.getString("username"));
+				u.setCredits(rs.getDouble("credits"));
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}

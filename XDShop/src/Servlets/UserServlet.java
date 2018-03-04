@@ -16,7 +16,7 @@ import Model.User;
 /**
  * Servlet implementation class UserServlet
  */
-@WebServlet(name = "UserServlet", urlPatterns = {"/UserServlet"})
+@WebServlet("/UserServlet")
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private final UserHelper helper = new UserHelper();
@@ -33,14 +33,13 @@ public class UserServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		PrintWriter out = response.getWriter();
-		out.write("<h2>Henlo</h2>");
 		String param = (String) request.getParameter("param").split("&")[0];
-		System.out.println(request.toString());
+		System.out.println(param);
 		boolean b = false;
 		
 		if(param.compareToIgnoreCase("loggedin") == 0){
 			Cookie cookie = request.getCookies()[0];
+			System.out.println("yay");
 			b = true;
 			//add 3 weeks to life
 			cookie.setMaxAge(cookie.getMaxAge() + 60*60*24*21);
@@ -64,7 +63,7 @@ public class UserServlet extends HttpServlet {
 			
 			if(u!=null){
 				response.setContentType("text/plain");
-				response.getWriter().write(u.getUsername());
+				response.getWriter().write(u.toJSONformat());
 			}
 			
 		}else if(param.compareToIgnoreCase("logout") == 0){
@@ -79,7 +78,14 @@ public class UserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+			
+			String userName = (String) request.getParameter("user").split("&")[0];
+			String pass = (String) request.getParameter("pass").split("&")[0];
+			String fName = (String) request.getParameter("fName").split("&")[0];
+			String lName = (String) request.getParameter("lName").split("&")[0];
+			User user = new User(userName, 0.0, fName, lName);
+			boolean b = helper.register(user, pass);
+			response.getWriter().write(String.valueOf(b));
 	}
 
 }
