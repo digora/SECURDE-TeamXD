@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import Model.DBConnection;
+import Model.ProductManager;
 
 //TODO import product manager
 public class ProductManagerHelper {
@@ -34,11 +35,10 @@ public class ProductManagerHelper {
 				ResultSet rs = dbc.executeQuery(query);
 				while(rs.next()){
 					ProductManager pm = new ProductManager();
-					pm.setId(rs.getInt("user_id"));
 					pm.setName(rs.getString("fname"), rs.getString("lname"));
-					pm.setUserName(rs.getString("username"));
+					pm.setUsername(rs.getString("username"));
 					pm.setPassword(rs.getString("password"));
-					pm.setCredits(rs.getDouble("credits"));
+					pm.setStoreName(rs.getString("store_name"));
 					tempArr.add(pm);
 				}
 				

@@ -16,11 +16,11 @@
 </head>
 <body>
 <!-- Need to make dynamic when someone logs in -->
-<jsp:include page="view/header-guest.jsp"></jsp:include>
+<jsp:include page="header-guest.jsp"></jsp:include>
 	
-	<jsp:include page="view/user-account-page.jsp"></jsp:include>
+	<jsp:include page="user-account-page.jsp"></jsp:include>
 	
-<jsp:include page="view/footer.html"></jsp:include>
+<jsp:include page="footer.html"></jsp:include>
 </body>
 
 <!-- Bootstrap core JavaScript -->

@@ -11,7 +11,8 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import Model.DBConnection;
+import Model.Cart;
+
 
 //TODO import cart
 public class CartHelper {
@@ -24,7 +25,7 @@ public class CartHelper {
 	private Cart getCartForUser(int userId) {
 		String query = "SELECT c FROM cart c, users u WHERE u.user_id = " + userId + " AND c.user_id = " + userId;
 		
-		return getCartFromQuery(query);
+		return Cart.toCart(getCartFromQuery(query));
 	}
 	
 	private boolean checkoutCart(int userId) {

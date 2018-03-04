@@ -5,6 +5,7 @@ import java.sql.*;
 
 public class ProductManager {
 	private String username;
+	private String password;
 	private String fname;
 	private String lname;
 	private String storeName;
@@ -62,5 +63,17 @@ public class ProductManager {
 		
 		return pm;
 	}
+
+	public void setName(String fName, String lName) {
+		// TODO Auto-generated method stub
+		this.fname = fName;
+		this.lname = lName;
+	}
+
+	public void setPassword(String password) {
+		// TODO Auto-generated method stub
+		this.password = password;
+	}
+
 
 }
