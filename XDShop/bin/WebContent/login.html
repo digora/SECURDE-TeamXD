@@ -11,7 +11,8 @@
 			    <label for="passwordInput">Password</label>
 			    <input type="password" class="form-control" id="passwordInput" placeholder="Password">
 			  </div>
-			  <button type="submit" class="btn btn-primary" id="btnSubmit">Submit</button>
+<<<<<<< Upstream, based on origin/master
+			  <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
 
 			</form>
 		</div>
@@ -33,6 +34,28 @@
                     if(obj == "true"){
                     	
                     	console.log("shwing")
+=======
+			  <button type="submit" class="btn btn-primary" id="btnSubmit">Submit</button>
+
+			</form>
+		</div>
+	</div>
+    </body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+            $("#submitBtn").click(function(){
+            	console.log("Hehe");
+                var chec = 'false';
+//	                if(document.getElementById('remember').checked){
+	//                    chec = 'true';
+	//                }
+                var user = document.getElementById("usernameInput").value;
+                var pass = document.getElementById("passwordInput").value;
+                var path = "/UserServlet?user="+user+"&pass="+pass+"&remembered="+chec+"&param=login";
+                
+                $.get(path,function(obj){
+                    if(obj == "true"){
+>>>>>>> d775c9a Bigpush
                         window.open("user.html");
                         window.close();
                     }else{
