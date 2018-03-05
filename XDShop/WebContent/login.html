@@ -19,7 +19,7 @@
     </body>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>
-            $("#submitBtn").click(function(){
+            $("#btnSubmit").click(function(){
             	console.log("Hehe");
                 var chec = 'false';
 //	                if(document.getElementById('remember').checked){
@@ -31,9 +31,11 @@
                 
                 $.get(path,function(obj){
                     if(obj == "true"){
+                    	console.log("ayy lmao");
                         window.open("index.jsp");
                         window.close();
                     }else{
+                    	console.log("ayy");
                         alert("Invalid username / pass");
                     }
                 });

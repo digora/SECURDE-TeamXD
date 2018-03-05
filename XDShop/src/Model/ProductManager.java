@@ -9,6 +9,7 @@ public class ProductManager {
 	private String fname;
 	private String lname;
 	private String storeName;
+	public static final ProductManager empty = new ProductManager();
 	
 	public ProductManager() {
 	};

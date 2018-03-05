@@ -8,6 +8,7 @@ public class User {
 	private Double credits;
 	private String fname;
 	private String lname;
+	public static final User empty = new User();
 
 	public User() {
 	};

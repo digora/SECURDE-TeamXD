@@ -23,5 +23,22 @@
 			</form>
 		</div>
 	</div>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script>
+	$("#btnSubmitReg").click(function(){
+		var storeName = document.getElementById("storeNameInput").value;
+	    var user = document.getElementById("usernameInput").value;
+	    var pass = document.getElementById("passwordInput").value;              
+	    var path = "ProductManagerServlet?user="+user+"&pass="+pass+"&storeName="+storeName;
+	    $.post(path, function(obj){
+	        console.log(obj);
+	        if(obj == "true"){
+	            window.open("login.html");
+	            window.close();
+	        }else{
+	            alert("Username already taken!");
+	        }
+	    });
+	});
+	</script>
 </div>

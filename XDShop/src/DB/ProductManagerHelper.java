@@ -2,6 +2,7 @@ package DB;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -26,13 +27,13 @@ public class ProductManagerHelper {
 		String query = "SELECT * FROM product_manager WHERE username = '"+ username + "'";
 		ResultSet rs = dbc.executeQuery(query);
 		
-		return ProductManager.toProductManager(rs);
+		return Objects.isNull(rs) ? ProductManager.empty : ProductManager.toProductManager(rs);
 	}
 	
 	private ProductManager login(String username, String password) {
 		String query = "SELECT p FROM product_manager p WHERE p.username = " + username + " AND u.password = " + password;
 		ResultSet rs = dbc.executeQuery(query);
-		return ProductManager.toProductManager(rs);
+		return Objects.isNull(rs) ? ProductManager.empty : ProductManager.toProductManager(rs);
 	}
 	
 	private ProductManager[] getProductManagerFromQuery(String query) {
@@ -65,8 +66,8 @@ public class ProductManagerHelper {
 		boolean check_If_Email_Is_Not_Taken_This_Variable_Is_So_Long_Lmao = false;
 		
 		ProductManager pmCheck = getProductManagerByUsername(pm.getUsername());
-		
-		if(pmCheck != null){
+		System.out.println("Hello");
+		if(pmCheck == ProductManager.empty){
 			check_If_Email_Is_Not_Taken_This_Variable_Is_So_Long_Lmao = true;
 			String query = "INSERT INTO product_manager(username, password, store_name) VALUES("
 					+ "'" + pm.getUsername() + "', "

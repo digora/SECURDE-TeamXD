@@ -4,6 +4,7 @@ package DB;
 import java.sql.ResultSet;
 import java.util.Objects;
 
+import Model.ProductManager;
 import Model.User;
 
 public class UserHelper {
@@ -17,7 +18,7 @@ public class UserHelper {
 		String query = "SELECT * FROM users WHERE username = '"+ username + "'";
 		ResultSet rs = dbc.executeQuery(query);
 		
-		return User.toUser(rs);
+		return Objects.isNull(rs) ? User.empty :User.toUser(rs);
 	}
 	
 	public User login(String username, String password){
@@ -25,7 +26,7 @@ public class UserHelper {
 				+ "AND password = '" + password + "'";
 		ResultSet rs = dbc.executeQuery(query);
 		
-		return User.toUser(rs);
+		return Objects.isNull(rs) ? User.empty :User.toUser(rs);
 	}
 	
 	public boolean register(User user, String password){
@@ -33,7 +34,7 @@ public class UserHelper {
 		
 		User u = getUserByUsername(user.getUsername());
 		
-		if(u != null){
+		if(u == User.empty){
 			check_If_Email_Is_Not_Taken_This_Variable_Is_So_Long_Lmao = true;
 			String query = "INSERT INTO users(fname, lname, username, password, credits) VALUES("
 					+ "'" + user.getFname() + "', "
