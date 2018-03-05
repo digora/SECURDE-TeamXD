@@ -30,7 +30,8 @@ public class ProductManagerHelper {
 		return Objects.isNull(rs) ? ProductManager.empty : ProductManager.toProductManager(rs);
 	}
 	
-	private ProductManager login(String username, String password) {
+	public ProductManager login(String username, String password) {
+		System.out.println("Logging in user " + username);
 		String query = "SELECT p FROM product_manager p WHERE p.username = " + username + " AND u.password = " + password;
 		ResultSet rs = dbc.executeQuery(query);
 		return Objects.isNull(rs) ? ProductManager.empty : ProductManager.toProductManager(rs);

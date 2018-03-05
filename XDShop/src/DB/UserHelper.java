@@ -22,6 +22,7 @@ public class UserHelper {
 	}
 	
 	public User login(String username, String password){
+		System.out.println("Logging in user " + username);
 		String query = "SELECT * FROM users WHERE username = '"+ username + "' "
 				+ "AND password = '" + password + "'";
 		ResultSet rs = dbc.executeQuery(query);

@@ -29,12 +29,12 @@
 		var storeName = document.getElementById("storeNameInput").value;
 	    var user = document.getElementById("usernameInput").value;
 	    var pass = document.getElementById("passwordInput").value;              
-	    var path = "ProductManagerServlet?user="+user+"&pass="+pass+"&storeName="+storeName;
+	    var path = "ProductManagerServlet?user="+user+"&pass="+pass+"&storeName="+storeName+"&param=register";
 	    $.post(path, function(obj){
 	        console.log(obj);
 	        if(obj == "true"){
 	            window.open("login.html");
-	            window.close();
+	            close();
 	        }else{
 	            alert("Username already taken!");
 	        }

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import DB.*;
 import Model.User;
+import Model.ProductManager;
 
 /**
  * Servlet implementation class UserServlet
@@ -20,6 +21,7 @@ import Model.User;
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private final UserHelper helper = new UserHelper();
+    private final ProductManagerHelper pmHelper = new ProductManagerHelper();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -48,6 +50,13 @@ public class UserServlet extends HttpServlet {
 			String pass = (String) request.getParameter("pass").split("&")[0];
 			boolean remember = Boolean.parseBoolean((String)request.getParameter("remembered").split("&")[0]);
 			if(helper.login(user, pass) != null){
+				b = true;
+				Cookie cookie = new Cookie("username", user);
+				if(remember){
+					cookie.setMaxAge(60*60*24*21);
+				}
+				response.addCookie(cookie);
+			}else if(pmHelper.login(user,pass) != null){
 				b = true;
 				Cookie cookie = new Cookie("username", user);
 				if(remember){
