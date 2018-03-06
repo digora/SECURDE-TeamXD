@@ -19,10 +19,10 @@
               <a class="nav-link" href="#" id="navContact">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" id="navAccount">Account</a>
+              <a class="nav-link" href="user-account-page.jsp" id="navAccount">Account</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" id="navViewCart">View Cart</a>
+              <a class="nav-link" href="view-cart.jsp" id="navViewCart">View Cart</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" id="navLogout">Logout</a>

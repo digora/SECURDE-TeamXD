@@ -19,13 +19,13 @@
               <a class="nav-link" href="#" id="navContact">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" id="navLogin">Login</a>
+              <a class="nav-link" href="login.html" id="navLogin">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" id="navSignUp">Sign up</a>
+              <a class="nav-link" href="register-user.html" id="navSignUp">Sign up</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" id="navPMSignUp">PM Sign up</a>
+              <a class="nav-link" href="register-pm.html" id="navPMSignUp">PM Sign up</a>
             </li>
           </ul>
         </div>

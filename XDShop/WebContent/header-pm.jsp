@@ -19,7 +19,7 @@
               <a class="nav-link" href="#" id="navContact">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" id="navManage">Manage Products</a>
+              <a class="nav-link" href="manage-products.jsp" id="navManage">Manage Products</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" id="navLogout">Logout</a>
