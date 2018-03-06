@@ -4,14 +4,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.NoResultException;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-
 import Model.ProductManager;
 import Model.User;
 

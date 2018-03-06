@@ -53,9 +53,9 @@ public class CartServlet extends HttpServlet {
 			int userId = Integer.parseInt(request.getParameter("userId").split("&")[0]);
 			helper.removeItemFromCart(p, userId);
 		}else if (param.compareToIgnoreCase("checkOutCart") == 0) {
-			b = true;
 			int userId = Integer.parseInt(request.getParameter("userId").split("&")[0]);
 			String address = (String) request.getParameter("address").split("&")[0];
+			b = helper.checkoutCart(userId, address);
 		}else if (param.compareToIgnoreCase("addItemToCart") == 0) {
 			b = true;
 			int prodId = Integer.parseInt(request.getParameter("prodId").split("&")[0]);
