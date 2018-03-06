@@ -12,13 +12,13 @@ public class CartHelper {
 		dbc = new DBConnection();
 	}
 	
-	private Cart[] getCartForUser(int userId) {
+	public Cart[] getCartForUser(int userId) {
 		String query = "SELECT * FROM cart WHERE user_id = " + userId;
 		
 		return getCartFromQuery(query);
 	}
 	
-	private boolean checkoutCart(int userId, String address) {
+	public boolean checkoutCart(int userId, String address) {
 		boolean success = false;
 		String query = "DELETE * FROM cart WHERE user_id = " + userId;
 		String query2 = "INSERT INTO order(u_id, date_created, address) VALUES("
@@ -73,7 +73,7 @@ public class CartHelper {
 		dbc.updateQuery(query);
 	}
 	
-	private Cart[] getCartFromQuery(String query) {
+	public Cart[] getCartFromQuery(String query) {
 		Cart[] finalArr = null;
 		ArrayList<Cart> tempArr = new ArrayList<>();
 		try{
