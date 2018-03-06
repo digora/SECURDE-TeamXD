@@ -16,8 +16,20 @@
 </head>
 <body>
 <!-- Need to make dynamic when someone logs in -->
-<jsp:include page="header-guest.jsp"></jsp:include>
+
+<script>
+	console.log("what is this");
+	$.get(function(obj){
+		if(obj == true){
+			$('#headerContainer').load("header-user.jsp");
+		}else{
+			$('#headerContainer').load("header-guest.jsp");
+		}
+	});
 	
+</script>
+<div id="headerContainer"></div>
+		
 	<jsp:include page="browse-shop.jsp"></jsp:include>
 	
 <jsp:include page="footer.html"></jsp:include>
