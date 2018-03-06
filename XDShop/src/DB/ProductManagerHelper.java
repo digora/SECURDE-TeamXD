@@ -64,12 +64,12 @@ public class ProductManagerHelper {
 	}
 
 	public boolean register(ProductManager pm, String pass) {
-		boolean check_If_Email_Is_Not_Taken_This_Variable_Is_So_Long_Lmao = false;
+		boolean regSuccess = false;
 		
 		ProductManager pmCheck = getProductManagerByUsername(pm.getUsername());
 		System.out.println("Hello");
 		if(pmCheck == ProductManager.empty){
-			check_If_Email_Is_Not_Taken_This_Variable_Is_So_Long_Lmao = true;
+			regSuccess = true;
 			String query = "INSERT INTO product_manager(username, password, store_name) VALUES("
 					+ "'" + pm.getUsername() + "', "
 					+ "'" + pass+ "', "
@@ -77,6 +77,6 @@ public class ProductManagerHelper {
 			
 			dbc.updateQuery(query);
 		}
-		return check_If_Email_Is_Not_Taken_This_Variable_Is_So_Long_Lmao;
+		return regSuccess;
 	}
 }

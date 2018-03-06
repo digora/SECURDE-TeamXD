@@ -31,12 +31,12 @@ public class UserHelper {
 	}
 	
 	public boolean register(User user, String password){
-		boolean check_If_Email_Is_Not_Taken_This_Variable_Is_So_Long_Lmao = false;
+		boolean regSuccess = false;
 		
 		User u = getUserByUsername(user.getUsername());
 		
 		if(u == User.empty){
-			check_If_Email_Is_Not_Taken_This_Variable_Is_So_Long_Lmao = true;
+			regSuccess = true;
 			String query = "INSERT INTO users(fname, lname, username, password, credits) VALUES("
 					+ "'" + user.getFname() + "', "
 					+ "'" + user.getLname() + "', "
@@ -46,7 +46,7 @@ public class UserHelper {
 			
 			dbc.updateQuery(query);
 		}
-		return check_If_Email_Is_Not_Taken_This_Variable_Is_So_Long_Lmao;
+		return regSuccess;
 	}
 	
 }

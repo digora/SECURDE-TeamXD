@@ -54,7 +54,7 @@ public class User {
 	public static User toUser(ResultSet rs){
 		User u = new User();
 		try{
-			while(rs.next())
+			if(rs.next())
 			{
 				u.setFname(rs.getString("fname"));
 				u.setLname(rs.getString("lname"));

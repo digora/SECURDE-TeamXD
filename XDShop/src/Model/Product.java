@@ -63,11 +63,14 @@ public class Product {
 	public static Product toProduct(ResultSet rs){
 		Product p = new Product();
 		try{
-			p.setImg_link(rs.getString("img_link"));
-			p.setPrice(rs.getDouble("price"));
-			p.setManager(rs.getInt("p_manager"));
-			p.setName(rs.getString("prod_name"));
-			p.setP_id(rs.getInt("prod_id"));
+			if(rs.next())
+			{
+				p.setImg_link(rs.getString("img_link"));
+				p.setPrice(rs.getDouble("price"));
+				p.setManager(rs.getInt("p_manager"));
+				p.setName(rs.getString("prod_name"));
+				p.setP_id(rs.getInt("prod_id"));
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
