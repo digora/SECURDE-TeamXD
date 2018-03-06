@@ -54,13 +54,10 @@ public class User {
 	public static User toUser(ResultSet rs){
 		User u = new User();
 		try{
-			if(rs.next())
-			{
-				u.setFname(rs.getString("fname"));
-				u.setLname(rs.getString("lname"));
-				u.setUsername(rs.getString("username"));
-				u.setCredits(rs.getDouble("credits"));
-			}
+			u.setFname(rs.getString("fname"));
+			u.setLname(rs.getString("lname"));
+			u.setUsername(rs.getString("username"));
+			u.setCredits(rs.getDouble("credits"));
 		}catch(Exception e){
 			e.printStackTrace();
 		}

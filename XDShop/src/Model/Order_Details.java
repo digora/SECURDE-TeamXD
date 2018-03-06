@@ -70,22 +70,20 @@ public class Order_Details{
 			DBConnection dbc = new DBConnection();
 			Order_Details od = null;
 			try{
-				if(rs.next()){
-					od = new Order_Details();
-					od.setDetail_id(rs.getInt("detail_id"));
-					od.setOrder_id(rs.getInt("orderid"));
-					od.setProduct_id(rs.getInt("product_id"));
-					od.setQty(rs.getInt("qty"));
-					
-					String query = "SELECT * FROM order_status WHERE detail_id = " + od.getDetail_id();
-					ArrayList<Order_Status> os = new ArrayList<>();
-					ResultSet r = dbc.executeQuery(query);
-					while(r.next()){
-						os.add(Order_Status.toOrderStatus(rs));
-					}
-					
-					od.setStatus(os);
+				od = new Order_Details();
+				od.setDetail_id(rs.getInt("detail_id"));
+				od.setOrder_id(rs.getInt("orderid"));
+				od.setProduct_id(rs.getInt("product_id"));
+				od.setQty(rs.getInt("qty"));
+				
+				String query = "SELECT * FROM order_status WHERE detail_id = " + od.getDetail_id();
+				ArrayList<Order_Status> os = new ArrayList<>();
+				ResultSet r = dbc.executeQuery(query);
+				while(r.next()){
+					os.add(Order_Status.toOrderStatus(rs));
 				}
+					
+				od.setStatus(os);
 			}catch(Exception e){
 				e.printStackTrace();
 			}

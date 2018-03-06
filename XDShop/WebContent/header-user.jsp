@@ -31,4 +31,11 @@
           </ul>
         </div>
       </div>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    	<script>
+    		$("navLogout").click(function{
+    			$.get("UserServlet?logout", function(obj){
+    			})
+    		});
+    	</script>
     </nav>

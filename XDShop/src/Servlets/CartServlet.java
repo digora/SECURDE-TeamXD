@@ -44,6 +44,7 @@ public class CartServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String param = (String) request.getParameter("param").split("&")[0];
+		System.out.println(param);
 		boolean b = false;
 		if(param.compareToIgnoreCase("removeFromCart") == 0)
 		{

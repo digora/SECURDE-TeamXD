@@ -8,16 +8,18 @@ public class Product {
 	private Double price;
 	private int manager;
 	private String img_link;
+	private int quantity;
 	
 	public Product(){}
 
-	public Product(String name, int p_id, Double price, int manager, String img_link) {
+	public Product(String name, int p_id, Double price, int manager, String img_link, int quantity) {
 		super();
 		this.name = name;
 		this.p_id = p_id;
 		this.price = price;
 		this.manager = manager;
 		this.img_link = img_link;
+		this.quantity = quantity;
 	}
 
 	public String getName() {
@@ -63,17 +65,19 @@ public class Product {
 	public static Product toProduct(ResultSet rs){
 		Product p = new Product();
 		try{
-			if(rs.next())
-			{
-				p.setImg_link(rs.getString("img_link"));
-				p.setPrice(rs.getDouble("price"));
-				p.setManager(rs.getInt("p_manager"));
-				p.setName(rs.getString("prod_name"));
-				p.setP_id(rs.getInt("prod_id"));
-			}
+			p.setImg_link(rs.getString("img_link"));
+			p.setPrice(rs.getDouble("price"));
+			p.setManager(rs.getInt("p_manager"));
+			p.setName(rs.getString("prod_name"));
+			p.setP_id(rs.getInt("prod_id"));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		return p;
+	}
+
+	public void setQty(int quantity) {
+		// TODO Auto-generated method stub
+		this.quantity = quantity;
 	}
 }

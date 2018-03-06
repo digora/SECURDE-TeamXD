@@ -54,13 +54,11 @@ public class Order_Status{
 	public static Order_Status toOrderStatus(ResultSet rs){
 		Order_Status os = null;
 		try{
-			if(rs.next()){
-				os = new Order_Status();
-				os.setDate(rs.getDate("date") + "");
-				os.setDetail_id(rs.getInt("detail_id"));
-				os.setStatus(rs.getString("status"));
-				os.setStatus_id(rs.getInt("status_id"));
-			}
+			os = new Order_Status();
+			os.setDate(rs.getDate("date") + "");
+			os.setDetail_id(rs.getInt("detail_id"));
+			os.setStatus(rs.getString("status"));
+			os.setStatus_id(rs.getInt("status_id"));
 		}catch(Exception e){
 			e.printStackTrace();
 		}

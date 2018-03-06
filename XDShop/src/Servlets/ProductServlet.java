@@ -35,22 +35,33 @@ public class ProductServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//TODO get all products
 		String param = (String) request.getParameter("param").split("&")[0];
-		Product[] products = new Product[1]; //1 is for queries that return only one product
+		System.out.println(param);
+		Product[] products = null; //1 is for queries that return only one product
 		if(param.compareToIgnoreCase("all") == 0) {
+			System.out.println("getting all");
 			products = helper.getAllProducts();
 		}else if (param.compareToIgnoreCase("search") == 0) {
+			System.out.println("search");
 			String searchString = (String) request.getParameter("searchString").split("&")[0];
 			products = helper.searchProducts(searchString);
 		}else if (param.compareToIgnoreCase("getById") == 0) {
+			System.out.println("getById");
 			int id = Integer.parseInt(request.getParameter("id").split("&")[0]);
+			products = new Product[1];
 			products[0] = helper.getProductById(id);
 		}else if (param.compareToIgnoreCase("getByPMId") == 0) {
+			System.out.println("getByPMId");
 			int pmId = Integer.parseInt(request.getParameter("pmId").split("&")[0]);
 			products = helper.getProductsByManagerId(pmId);
 		}else if (param.compareToIgnoreCase("getByPrice") == 0) {
+			System.out.println("getByPrice");
 			int startPrice = Integer.parseInt(request.getParameter("start").split("&")[0]);
 			int endPrice = Integer.parseInt(request.getParameter("end").split("&")[0]);
 			products = helper.getProductsByPrice(startPrice, endPrice);
+		}
+		for (Product product : products)
+		{
+			System.out.println("AAA " + product.getName());
 		}
 		response.getWriter().write(gson.toJson(products));
 	}

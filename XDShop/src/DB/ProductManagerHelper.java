@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import Model.Product;
 import Model.ProductManager;
 import Model.User;
 
@@ -35,12 +36,7 @@ public class ProductManagerHelper {
 			try{
 				ResultSet rs = dbc.executeQuery(query);
 				while(rs.next()){
-					ProductManager pm = new ProductManager();
-					pm.setName(rs.getString("fname"), rs.getString("lname"));
-					pm.setUsername(rs.getString("username"));
-					pm.setPassword(rs.getString("password"));
-					pm.setStoreName(rs.getString("store_name"));
-					tempArr.add(pm);
+					tempArr.add(ProductManager.toProductManager(rs));
 				}
 				
 				finalArr = new ProductManager[tempArr.size()];

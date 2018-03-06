@@ -52,11 +52,8 @@ public class ProductManager {
 	public static ProductManager toProductManager(ResultSet rs){
 		ProductManager pm = new ProductManager();
 		try{
-			if(rs.next())
-			{
-				pm.setUsername(rs.getString("username"));
-				pm.setStoreName(rs.getString("store_name"));
-			}
+			pm.setUsername(rs.getString("username"));
+			pm.setStoreName(rs.getString("store_name"));
 		}catch(Exception e){
 			e.printStackTrace();
 		}

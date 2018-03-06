@@ -18,7 +18,7 @@
 <!-- Need to make dynamic when someone logs in -->
 <jsp:include page="header-guest.jsp"></jsp:include>
 	
-	<jsp:include page="browse-shop.jsp"></jsp:include>
+	<jsp:include page="login.html"></jsp:include>
 	
 <jsp:include page="footer.html"></jsp:include>
 </body>

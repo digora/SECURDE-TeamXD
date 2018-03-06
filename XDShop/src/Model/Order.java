@@ -71,22 +71,20 @@ public class Order {
 		DBConnection dbc = new DBConnection();
 		Order o = null;
 		try{
-			if(rs.next()){
-				o = new Order();
-				o.setAddress(rs.getString("address"));
-				o.setUser_id(rs.getInt("u_id"));
-				o.setDateCreated(rs.getDate("date_created") + "");
-				o.setOrder_id(rs.getInt("order_id"));
-				
-				String query = "SELECT * FROM order_details WHERE orderid = " + o.getOrder_id();
-				ResultSet r = dbc.executeQuery(query);
-				ArrayList<Order_Details> od = new ArrayList<>();
-				
-				while(r.next()){
-					od.add(Order_Details.toOrderDetail(rs));
-				}
-				o.setOrders(od);
+			o = new Order();
+			o.setAddress(rs.getString("address"));
+			o.setUser_id(rs.getInt("u_id"));
+			o.setDateCreated(rs.getDate("date_created") + "");
+			o.setOrder_id(rs.getInt("order_id"));
+			
+			String query = "SELECT * FROM order_details WHERE orderid = " + o.getOrder_id();
+			ResultSet r = dbc.executeQuery(query);
+			ArrayList<Order_Details> od = new ArrayList<>();
+			
+			while(r.next()){
+				od.add(Order_Details.toOrderDetail(rs));
 			}
+			o.setOrders(od);
 		}catch(Exception e){
 			e.printStackTrace();
 		}

@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import Model.Product;
+import Model.ProductManager;
 
 public class ProductHelper {
 	private DBConnection dbc;
@@ -16,14 +17,15 @@ public class ProductHelper {
 	private Product[] getProductArr(String query){
 		ArrayList<Product> arr = new ArrayList<>();
 		try{
+			int i = 0;
 			ResultSet rs = dbc.executeQuery(query);
-			while(rs.next()){
+			while(rs.next()){			
 				arr.add(Product.toProduct(rs));
 			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return (Product[]) arr.toArray();
+		return arr.toArray(new Product[arr.size()]);
 	}
 	
 	public void addProduct(String name, int manager, double price, int quantity, String imageLink){

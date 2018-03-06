@@ -43,12 +43,9 @@ public class Cart {
 	public static Cart toCart(ResultSet rs){
 		Cart c = new Cart();
 		try{
-			if(rs.next())
-			{
-				c.setPid(rs.getInt("user_id"));
-				c.setUid(rs.getInt("p_id"));
-				c.setQty(rs.getInt("qty"));
-			}
+			c.setPid(rs.getInt("user_id"));
+			c.setUid(rs.getInt("p_id"));
+			c.setQty(rs.getInt("qty"));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
