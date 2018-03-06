@@ -125,4 +125,9 @@ public class ProductHelper {
 		String query = "SELECT * FROM product WHERE price >= " + start + " AND price <= " + end;
 		return getProductArr(query);
 	}
+	
+	public Product[] getAllProducts(){
+		String query = "SELECT * FROM product";
+		return getProductArr(query);
+	}
 }
