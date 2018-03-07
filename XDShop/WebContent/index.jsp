@@ -17,6 +17,7 @@
 <body>
 <!-- Need to make dynamic when someone logs in -->
 
+<<<<<<< HEAD
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
 	console.log("what is this");
