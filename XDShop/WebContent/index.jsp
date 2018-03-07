@@ -16,9 +16,24 @@
 </head>
 <body>
 <!-- Need to make dynamic when someone logs in -->
-<jsp:include page="header-guest.jsp"></jsp:include>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+	console.log("what is this");
+	var name = document.cookie.split("=")[1];
+	$.get("UserServlet?user=" + name + "&param=user", function(obj){
+		console.log(obj);
+		if(obj.fname != ""){
+			$('#headerContainer').load("header-user.jsp");
+		}else{
+			$('#headerContainer').load("header-guest.jsp");
+		}
+	});
 	
-	<jsp:include page="login.html"></jsp:include>
+</script>
+<div id="headerContainer"></div>
+		
+	<jsp:include page="browse-shop.jsp"></jsp:include>
 	
 <jsp:include page="footer.html"></jsp:include>
 </body>

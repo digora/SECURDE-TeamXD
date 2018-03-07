@@ -2,6 +2,7 @@ package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,28 +50,41 @@ public class UserServlet extends HttpServlet {
 			String user = (String) request.getParameter("user").split("&")[0];
 			String pass = (String) request.getParameter("pass").split("&")[0];
 			boolean remember = Boolean.parseBoolean((String)request.getParameter("remembered").split("&")[0]);
-			if(helper.login(user, pass) != null){
-				b = true;
-				Cookie cookie = new Cookie("username", user);
-				if(remember){
-					cookie.setMaxAge(60*60*24*21);
+			try {
+				if(helper.login(user, pass) != null){
+					b = true;
+					Cookie cookie = new Cookie("username", user);
+					if(remember){
+						cookie.setMaxAge(60*60*24*21);
+					}
+					response.addCookie(cookie);
+				}else if(pmHelper.login(user,pass) != null){
+					b = true;
+					Cookie cookie = new Cookie("username", user);
+					if(remember){
+						cookie.setMaxAge(60*60*24*21);
+					}
+					response.addCookie(cookie);
 				}
-				response.addCookie(cookie);
-			}else if(pmHelper.login(user,pass) != null){
-				b = true;
-				Cookie cookie = new Cookie("username", user);
-				if(remember){
-					cookie.setMaxAge(60*60*24*21);
-				}
-				response.addCookie(cookie);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			response.getWriter().write(String.valueOf(b));
 		}else if(param.compareToIgnoreCase("user") == 0){
+			System.out.println("Getting by user");
 			String user = (String) request.getParameter("user").split("&")[0];
-			User u = helper.getUserByUsername(user);
+			User u = null;
+			try {
+				u = helper.getUserByUsername(user);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			
 			if(u!=null){
+				System.out.println("Im GAY");
 				response.setContentType("text/plain");
 				response.getWriter().write(u.toJSONformat());
 			}
@@ -93,7 +107,13 @@ public class UserServlet extends HttpServlet {
 			String fName = (String) request.getParameter("fName").split("&")[0];
 			String lName = (String) request.getParameter("lName").split("&")[0];
 			User user = new User(userName, 0.0, fName, lName);
-			boolean b = helper.register(user, pass);
+			boolean b = false;
+			try {
+				b = helper.register(user, pass);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			response.getWriter().write(String.valueOf(b));
 	}
 

@@ -2,6 +2,7 @@ package DB;
 
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Objects;
 
 import Model.ProductManager;
@@ -14,23 +15,31 @@ public class UserHelper {
 		dbc.getConnection();
 	};
 	
-	public User getUserByUsername(String username){
+	public User getUserByUsername(String username) throws SQLException{
 		String query = "SELECT * FROM users WHERE username = '"+ username + "'";
+		System.out.println(username);
 		ResultSet rs = dbc.executeQuery(query);
 		
-		return Objects.isNull(rs) ? User.empty :User.toUser(rs);
+		User u = null;
+		if(rs.next()){
+			u = User.toUser(rs);
+		}
+		return u;
 	}
 	
-	public User login(String username, String password){
+	public User login(String username, String password) throws SQLException{
 		System.out.println("Logging in user " + username);
 		String query = "SELECT * FROM users WHERE username = '"+ username + "' "
 				+ "AND password = '" + password + "'";
 		ResultSet rs = dbc.executeQuery(query);
-		
-		return Objects.isNull(rs) ? User.empty :User.toUser(rs);
+		User u = null;
+		if(rs.next()){
+			u = User.toUser(rs);
+		}
+		return u;
 	}
 	
-	public boolean register(User user, String password){
+	public boolean register(User user, String password) throws SQLException{
 		boolean regSuccess = false;
 		
 		User u = getUserByUsername(user.getUsername());
