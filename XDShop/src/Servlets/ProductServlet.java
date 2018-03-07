@@ -51,8 +51,8 @@ public class ProductServlet extends HttpServlet {
 			products[0] = helper.getProductById(id);
 		}else if (param.compareToIgnoreCase("getByPMId") == 0) {
 			System.out.println("getByPMId");
-			int pmId = Integer.parseInt(request.getParameter("pmId").split("&")[0]);
-			products = helper.getProductsByManagerId(pmId);
+			String username = (String) request.getParameter("username").split("&")[0];
+			products = helper.getProductsByManagerId(username);
 		}else if (param.compareToIgnoreCase("getByPrice") == 0) {
 			System.out.println("getByPrice");
 			int startPrice = Integer.parseInt(request.getParameter("start").split("&")[0]);

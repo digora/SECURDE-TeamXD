@@ -112,8 +112,8 @@ public class ProductHelper {
 		return getProductArr(query);
 	}
 	
-	public Product[] getProductsByManagerId(int id){
-		String query = "SELECT * FROM products WHERE p_manager = '"+id+"'";
+	public Product[] getProductsByManagerId(String username){
+		String query = "SELECT * FROM products WHERE p_manager = '"+username+"'";
 		return getProductArr(query);
 	}
 	

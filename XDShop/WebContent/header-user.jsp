@@ -33,8 +33,8 @@
       </div>
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     	<script>
-    		$("navLogout").click(function(){
-    			$.get("UserServlet?logout", function(obj){
+    		$("#navLogout").click(function(){
+    			$.get("UserServlet?param=logout", function(obj){
     				window.open("login.html");
     				close();
     			});

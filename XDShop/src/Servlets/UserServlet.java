@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import DB.*;
 import Model.User;
 import Model.ProductManager;
@@ -23,6 +26,7 @@ public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private final UserHelper helper = new UserHelper();
     private final ProductManagerHelper pmHelper = new ProductManagerHelper();
+    private final Gson gson = new GsonBuilder().create();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -75,6 +79,7 @@ public class UserServlet extends HttpServlet {
 			System.out.println("Getting by user");
 			String user = (String) request.getParameter("user").split("&")[0];
 			User u = null;
+			ProductManager pm = null;
 			try {
 				u = helper.getUserByUsername(user);
 			} catch (SQLException e) {
@@ -84,9 +89,19 @@ public class UserServlet extends HttpServlet {
 			
 			
 			if(u!=null){
-				System.out.println("Im GAY");
-				response.setContentType("text/plain");
-				response.getWriter().write(u.toJSONformat());
+				System.out.println("Im a User");
+				response.getWriter().write(gson.toJson(u));
+			}else {
+				try {
+					pm = pmHelper.getProductManagerByUsername(user);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (pm != null){
+					System.out.println("Im a Product Manager");
+					response.getWriter().write(gson.toJson(pm));
+				}
 			}
 			
 		}else if(param.compareToIgnoreCase("logout") == 0){

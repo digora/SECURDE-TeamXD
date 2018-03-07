@@ -1,6 +1,8 @@
 package Servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -80,7 +82,13 @@ public class ProductManagerServlet extends HttpServlet {
 			String pass = (String) request.getParameter("pass").split("&")[0];
 			String storeName = (String) request.getParameter("storeName").split("&")[0];
 			ProductManager pm = new ProductManager(userName, storeName);
-			boolean b = helper.register(pm, pass);
+			boolean b = false;
+			try {
+				b = helper.register(pm, pass);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			response.getWriter().write(String.valueOf(b));
 		}
 		

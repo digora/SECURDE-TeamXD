@@ -16,16 +16,21 @@ public class ProductManagerHelper {
 		dbc = new DBConnection();
 	}
 	
-	public ProductManager getProductManagerByUsername(String username){
+	public ProductManager getProductManagerByUsername(String username) throws SQLException{
 		String query = "SELECT * FROM product_manager WHERE username = '"+ username + "'";
+		System.out.println(username);
 		ResultSet rs = dbc.executeQuery(query);
 		
-		return Objects.isNull(rs) ? ProductManager.empty : ProductManager.toProductManager(rs);
+		ProductManager pm = null;
+		if(rs.next()){
+			pm = ProductManager.toProductManager(rs);
+		}
+		return pm;
 	}
 	
 	public ProductManager login(String username, String password) {
 		System.out.println("Logging in user " + username);
-		String query = "SELECT p FROM product_manager p WHERE p.username = " + username + " AND u.password = " + password;
+		String query = "SELECT FROM product_manager WHERE username = " + username + " AND password = " + password;
 		ResultSet rs = dbc.executeQuery(query);
 		return Objects.isNull(rs) ? ProductManager.empty : ProductManager.toProductManager(rs);
 	}
@@ -51,7 +56,7 @@ public class ProductManagerHelper {
 			return finalArr;
 	}
 
-	public boolean register(ProductManager pm, String pass) {
+	public boolean register(ProductManager pm, String pass) throws SQLException {
 		boolean regSuccess = false;
 		
 		ProductManager pmCheck = getProductManagerByUsername(pm.getUsername());
