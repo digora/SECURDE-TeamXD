@@ -38,7 +38,7 @@
 		var lname = document.getElementById("lastNameInput").value;
 	    var user = document.getElementById("usernameInput").value;
 	    var pass = document.getElementById("passwordInput").value;              
-	    var path = "UserServlet?user="+user+"&pass="+pass+"&fName="+fname+"&lName="+lname;
+	    var path = "UserServlet?user="+user+"&pass="+pass+"&fName="+fname+"&lName="+lname+"&param=register";
 	    $.post(path, function(obj){
 	        alert(obj);
 	        if(obj == "true"){

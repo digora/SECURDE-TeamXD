@@ -1,6 +1,7 @@
 package DB;
 
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -37,6 +38,33 @@ public class UserHelper {
 			u = User.toUser(rs);
 		}
 		return u;
+	}
+	
+	public double getCredits(String username) throws SQLException {
+		String query = "SELECT credits FROM users WHERE username = '"+ username + "'";
+		ResultSet rs = dbc.executeQuery(query);
+		double val = 0;
+		if(rs.next())
+		{
+			val = rs.getDouble("credits");
+		}
+		return val;
+	}
+	public void reloadCredits(String username, double amount) throws SQLException {
+		String query = "UPDATE USERS SET credits = credits + ? WHERE username = ?";
+		try{
+			
+			PreparedStatement pstmt = dbc.createPreparedStatement(query);
+			pstmt.setDouble(1, amount);
+			pstmt.setString(2, username);
+			
+			pstmt.executeUpdate();
+			pstmt.close();
+			
+			System.out.println("Credits reloaded by " + amount);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	public boolean register(User user, String password) throws SQLException{

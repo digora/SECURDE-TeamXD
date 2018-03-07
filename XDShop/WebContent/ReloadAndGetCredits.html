@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<input type = "number" id = "amount" min = "0"></>
+<button id = "reload">RELOAD</button>
+<button id = "showBal">SHOW BALANCE</button>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+$("#reload").click(function(){
+	var username = document.cookie.split("=")[1];
+	var amount = document.getElementById("amount").value;
+            $.post("UserServlet?param=reload&user="+username+"&amount="+amount, function(obj)
+            {
+            	console.log("Reloaded");
+                //imageCount = obj.split(",,,").length - 1;
+            });
+            
+})
+$("#showBal").click(function(){
+	var username = document.cookie.split("=")[1];
+	$.get("UserServlet?param=getCredits&user="+username, function(obj){
+    	console.log(obj);
+    	alert("Balance is " + JSON.parse(obj));
+    });
+});
+</script>
+</body>
+</html>

@@ -108,6 +108,16 @@ public class UserServlet extends HttpServlet {
 			Cookie cook = request.getCookies()[0];
 			cook.setMaxAge(0);
 			response.addCookie(cook);
+		}else if(param.compareToIgnoreCase("getCredits") == 0){
+			String user = (String) request.getParameter("user").split("&")[0];
+			double credits = 0.0;
+			try {
+				credits = helper.getCredits(user);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.getWriter().write(gson.toJson(credits));
 		}
 	}
 
@@ -116,20 +126,31 @@ public class UserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-			
-			String userName = (String) request.getParameter("user").split("&")[0];
-			String pass = (String) request.getParameter("pass").split("&")[0];
-			String fName = (String) request.getParameter("fName").split("&")[0];
-			String lName = (String) request.getParameter("lName").split("&")[0];
-			User user = new User(userName, 0.0, fName, lName);
-			boolean b = false;
-			try {
-				b = helper.register(user, pass);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			String param = (String) request.getParameter("param").split("&")[0];
+			if(param.compareToIgnoreCase("register") == 0){
+				String userName = (String) request.getParameter("user").split("&")[0];
+				String pass = (String) request.getParameter("pass").split("&")[0];
+				String fName = (String) request.getParameter("fName").split("&")[0];
+				String lName = (String) request.getParameter("lName").split("&")[0];
+				User user = new User(userName, 0.0, fName, lName);
+				boolean b = false;
+				try {
+					b = helper.register(user, pass);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				response.getWriter().write(String.valueOf(b));
+			}else if(param.compareToIgnoreCase("reload") == 0){
+				String userName = (String) request.getParameter("user").split("&")[0];
+				double amount = Double.parseDouble(request.getParameter("amount").split("&")[0]);
+				try {
+					helper.reloadCredits(userName, amount);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-			response.getWriter().write(String.valueOf(b));
 	}
 
 }

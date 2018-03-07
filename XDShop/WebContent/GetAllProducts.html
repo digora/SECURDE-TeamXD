@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Product List</title>     
+</head>
+<body>
+<button id = "get">GET</button>
+</div>
+</body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+
+$("#get").click(function(){
+			var username = document.cookie.split("=")[1];
+            $.get("ProductServlet?param=all", function(obj)
+            {
+            	console.log(obj);
+                //imageCount = obj.split(",,,").length - 1;
+                addPhotos(obj);
+            });
+            
+            function addPhotos(obj)
+            {
+                if(obj!=null){
+                    var jsonarr = JSON.parse(obj);	
+                    var x = jsonarr.length;
+                    if(obj!=""){
+                        for (var i = 0; i < x; i++)
+                        {
+                            var jsonobj = jsonarr[i];
+                            var photo = $("<div>");
+                            $(photo).addClass("photos");
+                            $(photo).addClass("col-md-2");
+                            $(photo).prepend("<img height = 250 width = 250 class = 'img img-responsive' src = '" + jsonobj.img_link + "'/>");
+                            var imgid = $("<div>");
+                            $(imgid).addClass("id");
+                            $((imgid).html("<p>" + i + "</p>"));  
+                            $(photo).append(imgid); 
+                            $("#productListing").append(photo);
+                        }
+                    }
+                    
+                }
+            }
+        });
+</script> 
+</html>
