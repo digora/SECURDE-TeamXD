@@ -11,7 +11,7 @@
 			    <label for="passwordInput">Password</label>
 			    <input type="password" class="form-control" id="passwordInput" placeholder="Password">
 			  </div>
-			  <button type="submit" class="btn btn-primary" id="btnSubmit">Submit</button>
+			  <button type="button" class="btn btn-primary" id="btnSubmit">Submit</button>
 
 			</form>
 		</div>
@@ -22,18 +22,16 @@
             $("#btnSubmit").click(function(){
             	console.log("Hehe");
                 var chec = 'false';
-//	                if(document.getElementById('remember').checked){
-	//                    chec = 'true';
-	//                }
                 var user = document.getElementById("usernameInput").value;
                 var pass = document.getElementById("passwordInput").value;
                 var path = "UserServlet?user="+user+"&pass="+pass+"&remembered="+chec+"&param=login";
                 
                 $.get(path,function(obj){
-                    if(obj == "true"){
+                	console.log(obj);
+                    if(obj == 'true'){
                     	console.log(document.cookie);
-                        window.open("index.jsp");
-                        close();
+                        window.location.href = "index.jsp";
+                        //close();
                         
                     }else{
                     	console.log("ayy");

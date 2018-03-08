@@ -26,7 +26,7 @@
 			    <input type="password" class="form-control" id="passwordInput" placeholder="Password">
 			  </div>
 			  
-			  <button type="submit" class="btn btn-primary" id="btnSubmitRegUser">Submit</button>
+			  <button type="button" class="btn btn-primary" id="btnSubmitRegUser">Submit</button>
 			</form>
 		</div>
 	</div>
@@ -40,11 +40,10 @@
 	    var pass = document.getElementById("passwordInput").value;              
 	    var path = "UserServlet?user="+user+"&pass="+pass+"&fName="+fname+"&lName="+lname+"&param=register";
 	    $.post(path, function(obj){
-	        alert(obj);
+	        console.log(obj);
 	        if(obj == "true"){
 	        	console.log("ayy");
-	            window.open("login.html");
-	            close();
+	            window.location.href = "login.html";
 	        }else{
 	            alert("Username already taken!");
 	        }

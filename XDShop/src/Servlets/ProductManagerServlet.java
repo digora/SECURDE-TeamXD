@@ -8,7 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import DB.*;
+import Model.Product;
 import Model.ProductManager;
 import Model.User;
 /**
@@ -19,6 +24,7 @@ public class ProductManagerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private final ProductManagerHelper helper = new ProductManagerHelper();
     private final ProductHelper pHelper = new ProductHelper();
+    private final Gson gson = new GsonBuilder().create();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -31,7 +37,17 @@ public class ProductManagerServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String param = (String) request.getParameter("param").split("&")[0];
+		String username = (String) request.getParameter("username").split("&")[0];;
+		System.out.println(param);
+		if (param.compareToIgnoreCase("getByPM") == 0) 
+		{
+			Product[] products = null;
+			System.out.println("getByPM");
+			products = pHelper.getProductsByManagerId(username);
+			response.getWriter().write(gson.toJson(products));
+		} else
+			response.getWriter().write("false");
 	}
 
 	/**
@@ -41,29 +57,30 @@ public class ProductManagerServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String param = (String) request.getParameter("param").split("&")[0];
 		//TODO store and get the productManager's ID for literally everything in this servlet
-		int managerId = 1;
+		String username = (String) request.getParameter("username").split("&")[0];;
 		//TODO As mentioned above, just 2 TODOs for emphasis
 		System.out.println(param);
+		boolean b = false;
+		
 		if(param.compareToIgnoreCase("restock") == 0)
 		{
 			int prodId = Integer.parseInt(request.getParameter("prodId").split("&")[0]);
 			int quantity = Integer.parseInt(request.getParameter("qty").split("&")[0]);
-			pHelper.restockProduct(prodId, managerId, quantity);
+			b = pHelper.restockProduct(prodId, username, quantity);
 		}
-		
 		else if (param.compareToIgnoreCase("add") == 0)
 		{
 			String name = (String) request.getParameter("name").split("&")[0];
 			double price = Double.parseDouble((String) request.getParameter("price").split("&")[0]);
 			int quantity = Integer.parseInt(request.getParameter("qty").split("&")[0]);
 			String imageLink = (String) request.getParameter("imgLink").split("&")[0];
-			pHelper.addProduct(name, managerId, price, quantity, imageLink);
+			b = pHelper.addProduct(name, username, price, quantity, imageLink);
 		}
 		
 		else if (param.compareToIgnoreCase("delete") == 0)
 		{
 			int prodId = Integer.parseInt(request.getParameter("prodId").split("&")[0]);
-			pHelper.deleteProduct(prodId);
+			b = pHelper.deleteProduct(prodId, username);
 		}
 		
 		else if (param.compareToIgnoreCase("edit") == 0)
@@ -73,7 +90,7 @@ public class ProductManagerServlet extends HttpServlet {
 			double price = Double.parseDouble((String) request.getParameter("price").split("&")[0]);
 			int quantity = Integer.parseInt(request.getParameter("qty").split("&")[0]);
 			String imageLink = (String) request.getParameter("imgLink").split("&")[0];
-			pHelper.editProduct(prodId, name, managerId, price, quantity, imageLink);
+			b = pHelper.editProduct(prodId, name, username, price, quantity, imageLink);
 		}
 		
 		else if (param.compareToIgnoreCase("register") == 0)
@@ -82,15 +99,16 @@ public class ProductManagerServlet extends HttpServlet {
 			String pass = (String) request.getParameter("pass").split("&")[0];
 			String storeName = (String) request.getParameter("storeName").split("&")[0];
 			ProductManager pm = new ProductManager(userName, storeName);
-			boolean b = false;
+			
 			try {
 				b = helper.register(pm, pass);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			response.getWriter().write(String.valueOf(b));
+			
 		}
+		response.getWriter().write(String.valueOf(b));
 		
 	}
 

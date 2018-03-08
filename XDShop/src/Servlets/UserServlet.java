@@ -61,6 +61,7 @@ public class UserServlet extends HttpServlet {
 					if(remember){
 						cookie.setMaxAge(60*60*24*21);
 					}
+					System.out.println("User " + user + " logged in");
 					response.addCookie(cookie);
 				}else if(pmHelper.login(user,pass) != null){
 					b = true;
@@ -68,12 +69,14 @@ public class UserServlet extends HttpServlet {
 					if(remember){
 						cookie.setMaxAge(60*60*24*21);
 					}
+					System.out.println("PM " + user + " logged in");
 					response.addCookie(cookie);
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			System.out.println(b);
 			response.getWriter().write(String.valueOf(b));
 		}else if(param.compareToIgnoreCase("user") == 0){
 			System.out.println("Getting by user");
@@ -86,8 +89,6 @@ public class UserServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			
 			if(u!=null){
 				System.out.println("Im a User");
 				response.getWriter().write(gson.toJson(u));
@@ -134,6 +135,7 @@ public class UserServlet extends HttpServlet {
 				String lName = (String) request.getParameter("lName").split("&")[0];
 				User user = new User(userName, 0.0, fName, lName);
 				boolean b = false;
+				System.out.println("Registering user " + userName);
 				try {
 					b = helper.register(user, pass);
 				} catch (SQLException e) {

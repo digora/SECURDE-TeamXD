@@ -28,11 +28,16 @@ public class ProductManagerHelper {
 		return pm;
 	}
 	
-	public ProductManager login(String username, String password) {
+	public ProductManager login(String username, String password) throws SQLException {
 		System.out.println("Logging in user " + username);
-		String query = "SELECT FROM product_manager WHERE username = " + username + " AND password = " + password;
+		String query = "SELECT * FROM product_manager WHERE username = '" + username 
+				+ "' AND password = '" + password + "'";
 		ResultSet rs = dbc.executeQuery(query);
-		return Objects.isNull(rs) ? ProductManager.empty : ProductManager.toProductManager(rs);
+		ProductManager pm = null;
+		if(rs.next()){
+			pm = ProductManager.toProductManager(rs);
+		}
+		return pm;
 	}
 	
 	private ProductManager[] getProductManagerFromQuery(String query) {
@@ -61,8 +66,9 @@ public class ProductManagerHelper {
 		
 		ProductManager pmCheck = getProductManagerByUsername(pm.getUsername());
 		System.out.println("Hello");
-		if(pmCheck == ProductManager.empty){
+		if(pmCheck == null){
 			regSuccess = true;
+			System.out.println("Registration successful for PM " + pm.getUsername());
 			String query = "INSERT INTO product_manager(username, password, store_name) VALUES("
 					+ "'" + pm.getUsername() + "', "
 					+ "'" + pass+ "', "

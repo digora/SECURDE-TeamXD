@@ -32,8 +32,7 @@
     	<script>
     		$("#navLogout").click(function(){
     			$.get("UserServlet?param=logout", function(obj){
-    				window.open("login.html");
-    				close();
+    				window.location.href = "login.html";
     			});
     		});
     	</script>

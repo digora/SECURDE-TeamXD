@@ -72,7 +72,8 @@ public class UserHelper {
 		
 		User u = getUserByUsername(user.getUsername());
 		
-		if(u == User.empty){
+		if(u == null){
+			System.out.println("Registration successful for user " + user.getUsername());
 			regSuccess = true;
 			String query = "INSERT INTO users(fname, lname, username, password, credits) VALUES("
 					+ "'" + user.getFname() + "', "
