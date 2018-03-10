@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- Add a product -->
+<label>Product Name:</label>
+<input type = "text" id = "prod_name"/>
+<label>Product Price:</label>
+<input type = "number" id = "price"/>
+<label>Product Quantity:</label>
+<input type = "number" id = "quantity"/>
+<label>Product Image Link:</label>
+<input type = "text" id = "img_link"/>
+<button id = "addProduct">Add product</button>
+<br>
+<br>
+
+<!-- Get all products for a product manager -->
+<button id = "getByPM">Get products for a product manager</button>
+<div id = "productListing"></div>
+<br>
+<br>
+
+<!-- Restock product -->
+<label>Product ID: </label>
+<input type = 'number' id = "productId"/>
+<label>Amount to be restocked: </label>
+<input type = 'number' id = "restockAmount"/>
+<button id = "restockProduct">Restock product</button>
+
+<br>
+<br>
+
+<!-- Delete product -->
+<label>Product ID: </label>
+<input type = 'number' id = "productIdToBeDeleted"/>
+<button id = "deleteProduct">Delete product</button>
+<br>
+<br>
+
+<!-- Edit product -->
+<label>Product ID: </label>
+<input type = 'number' id = "productIdToBeEdited"/>
+<label>New Product Name: </label>
+<input type = 'text' id = "newProdName"/>
+<label>New Product Image Link: </label>
+<input type = 'text' id = "newImageLink"/>
+<label>New Product Price: </label>
+<input type = 'number' id = "newProdPrice"/>
+<button id = "editProduct">Edit product</button>
+</body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+$("#addProduct").click(function(){
+	var username = document.cookie.split("=")[1];
+	var prodname = document.getElementById("prod_name").value;
+	var amount = document.getElementById("quantity").value;
+	var price = document.getElementById("price").value;
+	var link = document.getElementById("img_link").value;
+            $.post("ProductManagerServlet?param=add&username="+username+"&name="+prodname+"&price="+price+"&qty="+amount+"&imgLink="+link, function(obj)
+            {
+            	console.log("Reloaded");
+                //imageCount = obj.split(",,,").length - 1;
+            });
+});
+
+$("#editProduct").click(function(){
+	var prodId = document.getElementById("productIdToBeEdited").value;
+	var username = document.cookie.split("=")[1];
+	console.log(document.getElementById("newProdName").value);
+	var prodname;
+	if (document.getElementById("newProdName").value != "")
+		prodname = document.getElementById("newProdName").value;
+	else
+		prodname = "none";
+	
+	var price;
+	if(document.getElementById("newProdPrice").value != "")
+		price = document.getElementById("newProdPrice").value;
+	else
+		price = "none";
+	
+	var link;
+	if(document.getElementById("newImageLink").value != "")
+		link = document.getElementById("newImageLink").value;
+	else
+		link = "none";
+	
+	console.log(prodname + " " + price + " " + link);
+	
+	if(prodId == "" || prodname == "none" && price == "none" && link == "none")
+		alert("There are errors in your form.");
+	else
+		$.post("ProductManagerServlet?param=edit&username="+username+"&name="+prodname+"&price="+price+"&prodId="+prodId+"&imgLink="+link, function(obj){
+			console.log("Edited product!");
+		});
+});
+
+$("#restockProduct").click(function(){
+	var username = document.cookie.split("=")[1];
+	var prodId = document.getElementById("productId").value;
+	var amount = document.getElementById("restockAmount").value;
+            $.post("ProductManagerServlet?param=restock&username="+username+"&qty="+amount+"&prodId="+prodId, function(obj)
+            {
+            	console.log("Product restocked by " + amount);	
+            });
+});
+
+$("#deleteProduct").click(function(){
+	var username = document.cookie.split("=")[1];
+	var prodId = document.getElementById("productIdToBeDeleted").value;
+            $.post("ProductManagerServlet?param=delete&username="+username+"&prodId="+prodId, function(obj)
+            {
+            	console.log("Product deleted");	
+            });
+});
+
+$("#getByPM").click(function(){
+	var username = document.cookie.split("=")[1];
+	$.get("ProductManagerServlet?param=getByPM"+"&username="+username, function(obj){
+		console.log("Getting by pm");
+		addPhotos(obj);
+	});
+	function addPhotos(obj)
+    	{
+	         if(obj!=null)
+	         {
+	             var jsonarr = JSON.parse(obj);	
+	             var x = jsonarr.length;
+	             if(obj!="")
+	             {
+	                 for (var i = 0; i < x; i++)
+	                 {
+	                     var jsonobj = jsonarr[i];
+	                     var photo = $("<div>");
+	                     $(photo).addClass("photos");
+	                     $(photo).addClass("col-md-2");
+	                     $(photo).prepend("<img height = 125 width = 125 class = 'img img-responsive' src = '" + jsonobj.img_link + "'/>");
+	                     var imgid = $("<div>");
+	                     $(imgid).addClass("id");
+	                     $((imgid).html("<p>" + i + "</p>"));  
+	                     $(photo).append(imgid); 
+	                     $("#productListing").append(photo);
+	                 }
+	             }
+            
+        	}
+   	 }
+});
+</script>
+</html>

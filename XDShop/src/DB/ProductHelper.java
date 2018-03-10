@@ -28,14 +28,14 @@ public class ProductHelper {
 		return arr.toArray(new Product[arr.size()]);
 	}
 	
-	public boolean addProduct(String name, String manager, double price, int quantity, String imageLink){
-		String query = "INSERT INTO product(prod_name, username, price, qty, img_link) VALUES(?,?,?,?,?,?)";
+	public boolean addProduct(String name, int manager, double price, int quantity, String imageLink){
+		String query = "INSERT INTO product(prod_name, p_manager, price, qty, img_link) VALUES(?,?,?,?,?);";
 		try{
 			
 			PreparedStatement pstmt = dbc.createPreparedStatement(query);
 			
 			pstmt.setString(1, name);
-			pstmt.setString(2, manager);
+			pstmt.setInt(2, manager);
 			pstmt.setDouble(3, price);
 			pstmt.setInt(4, quantity);
 			pstmt.setString(5, imageLink);
@@ -52,8 +52,8 @@ public class ProductHelper {
 		return true;
 	}
 	
-	public boolean restockProduct(int prodId, String manager, int quantity){
-		String query = "UPDATE product SET qty = qty + ? WHERE prod_id = ? AND username = ?"
+	public boolean restockProduct(int prodId, int manager, int quantity){
+		String query = "UPDATE product SET qty = qty + ? WHERE prod_id = ? "
 				+ "AND p_manager = ?";
 		try{
 			
@@ -61,7 +61,7 @@ public class ProductHelper {
 			
 			pstmt.setInt(1, quantity);
 			pstmt.setInt(2, prodId);
-			pstmt.setString(3, manager);
+			pstmt.setInt(3, manager);
 			
 			pstmt.executeUpdate();
 			pstmt.close();
@@ -74,23 +74,19 @@ public class ProductHelper {
 		return true;
 	}
 	
-	public boolean editProduct(int id, String name, String manager, double price, int quantity, String imageLink){
-		String query = "UPDATE product SET prod_id = ? SET prod_name = ? SET price = ? SET qty = ? SET img_link = ? WHERE prod_id = ? AND username = ?";
+	public boolean editProductName(String newName, int manager, int prodId){
+		String query = "UPDATE product SET prod_name = ? WHERE p_manager = ? AND prod_id = ?";
 		try{
 			
 			PreparedStatement pstmt = dbc.createPreparedStatement(query);
 			
-			pstmt.setInt(1, id);
-			pstmt.setString(2, name);
-			pstmt.setDouble(3, price);
-			pstmt.setInt(4, quantity);
-			pstmt.setString(5, imageLink);
-			pstmt.setInt(6, id);
-			pstmt.setString(7, manager);
+			pstmt.setString(1, newName);
+			pstmt.setInt(2, manager);
+			pstmt.setInt(3, prodId);
 			pstmt.executeUpdate();
 			pstmt.close();
 			
-			System.out.println("Product edited!");
+			System.out.println("Product name edited!");
 		}catch(Exception e){
 			e.printStackTrace();
 			return false;
@@ -98,12 +94,54 @@ public class ProductHelper {
 		return true;
 	}
 	
-	public boolean deleteProduct(int id, String manager){
-		String query = "DELETE FROM product WHERE prod_id = ? AND username = ?";
+	public boolean editProductPrice(double newPrice, int manager, int prodId){
+		
+		String query = "UPDATE product SET price = ? WHERE p_manager = ? AND prod_id = ?";
+		try{
+			
+			PreparedStatement pstmt = dbc.createPreparedStatement(query);
+			
+			pstmt.setDouble(1, newPrice);
+			pstmt.setInt(2, manager);
+			pstmt.setInt(3, prodId);
+			pstmt.executeUpdate();
+			pstmt.close();
+			
+			System.out.println("Product price edited!");
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean editProductImage(String newImageLink, int manager, int prodId){
+		String query = "UPDATE product SET img_link = ? WHERE p_manager = ? AND prod_id = ?";
+		try{
+			
+			PreparedStatement pstmt = dbc.createPreparedStatement(query);
+			
+			pstmt.setString(1, newImageLink);
+			pstmt.setInt(2, manager);
+			pstmt.setInt(3, prodId);
+			pstmt.executeUpdate();
+			pstmt.close();
+			
+			System.out.println("Product image link edited!");
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean deleteProduct(int id, int manager){
+		String query = "DELETE FROM product WHERE prod_id = ? AND p_manager = ?";
 		try{
 			PreparedStatement pstmt = dbc.createPreparedStatement(query);
 			
 			pstmt.setInt(1, id);
+			pstmt.setInt(2, manager);
 			pstmt.executeUpdate();
 			pstmt.close();
 			
@@ -116,12 +154,12 @@ public class ProductHelper {
 	}
 	
 	public Product[] searchProducts(String searchName){
-		String query = "SELECT * FROM products WHERE prod_name LIKE '%"+searchName+"%'";
+		String query = "SELECT * FROM product WHERE prod_name LIKE '%"+searchName+"%'";
 		return getProductArr(query);
 	}
 	
-	public Product[] getProductsByManagerId(String username){
-		String query = "SELECT * FROM products WHERE p_manager = '"+username+"'";
+	public Product[] getProductsByManagerId(int prodManagerId){
+		String query = "SELECT * FROM product WHERE p_manager = '"+prodManagerId+"'";
 		return getProductArr(query);
 	}
 	

@@ -16,6 +16,18 @@ public class ProductManagerHelper {
 		dbc = new DBConnection();
 	}
 	
+	public int getProductManagerIdByUsername(String username) throws SQLException {
+		String query = "SELECT prod_man_id FROM product_manager WHERE username = '"+ username + "'";
+		System.out.println("Getting PM id for PM " + username);
+		ResultSet rs = dbc.executeQuery(query);
+		
+		int id = -1;
+		if(rs.next()){
+			id = rs.getInt(1);
+		}
+		return id;
+	}
+	
 	public ProductManager getProductManagerByUsername(String username) throws SQLException{
 		String query = "SELECT * FROM product_manager WHERE username = '"+ username + "'";
 		System.out.println(username);
