@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<button id ="loadUser">Load user details</button>
+<div id = "userStuff"></div>
+</body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+	$("#loadUser").click(function(){
+		var username = document.cookie.split("=")[1];
+		$.get("UserServlet?param=user&user=" + username, function(obj){
+			var user = JSON.parse(obj);
+			console.log(user);
+		});
+	});
+</script>
+</html>
