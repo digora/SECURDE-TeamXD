@@ -41,11 +41,15 @@ public class Cart {
 	}
 	
 	public static Cart toCart(ResultSet rs){
-		Cart c = new Cart();
+		Cart c = null;
 		try{
-			c.setPid(rs.getInt("user_id"));
-			c.setUid(rs.getInt("p_id"));
-			c.setQty(rs.getInt("qty"));
+			if(rs.next())
+			{
+				c = new Cart();
+				c.setPid(rs.getInt("user_id"));
+				c.setUid(rs.getInt("p_id"));
+				c.setQty(rs.getInt("qty"));
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
