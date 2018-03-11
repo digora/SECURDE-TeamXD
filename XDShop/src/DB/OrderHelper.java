@@ -52,7 +52,7 @@ public class OrderHelper {
 		return (Order_Details[]) od.toArray();
 	}
 	
-	public void addOrderStatus(Order_Details od, Order_Status os){
+	public void addOrderStatus(Order_Status os){
 		String query = "INSERT INTO order_status(date, status, detail_id) VALUES(CURDATE(),'"
 				+ os.getStatus() + "',"
 				+ os.getDetail_id() + ")";
