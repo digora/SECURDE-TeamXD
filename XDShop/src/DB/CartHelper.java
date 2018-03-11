@@ -107,7 +107,7 @@ public class CartHelper {
 	}
 	
 	public void removeItemFromCart(Product p, int userId){
-		String query = "DELETE FROM cart WHERE p_id = " + p.getPrice() + " AND user_id = " + userId;
+		String query = "DELETE FROM cart WHERE p_id = " + p.getP_id() + " AND user_id = " + userId;
 		
 		dbc.updateQuery(query);
 	}
@@ -120,7 +120,7 @@ public class CartHelper {
 			while(rs.next()){
 				tempArr.add(Cart.toCart(rs));
 			}
-			finalArr = (Cart[]) tempArr.toArray();
+			finalArr = tempArr.toArray(new Cart[tempArr.size()]);		
 		}catch(Exception e){
 			e.printStackTrace();
 		}

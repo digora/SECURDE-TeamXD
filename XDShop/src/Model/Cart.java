@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Cart {
 	private int qty;
@@ -40,19 +41,12 @@ public class Cart {
 		this.uid = uid;
 	}
 	
-	public static Cart toCart(ResultSet rs){
+	public static Cart toCart(ResultSet rs) throws SQLException{
 		Cart c = null;
-		try{
-			if(rs.next())
-			{
-				c = new Cart();
-				c.setPid(rs.getInt("user_id"));
-				c.setUid(rs.getInt("p_id"));
-				c.setQty(rs.getInt("qty"));
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		c = new Cart();
+		c.setPid(rs.getInt("p_id"));
+		c.setUid(rs.getInt("user_id"));
+		c.setQty(rs.getInt("qty"));
 		return c;
 	}
 	

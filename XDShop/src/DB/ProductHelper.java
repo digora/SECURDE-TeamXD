@@ -2,6 +2,7 @@ package DB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Model.Product;
@@ -163,10 +164,13 @@ public class ProductHelper {
 		return getProductArr(query);
 	}
 	
-	public Product getProductById(int id){
+	public Product getProductById(int id) throws SQLException{
 		String query = "SELECT * FROM product WHERE prod_id = '" + id + "'";
 		ResultSet rs = dbc.executeQuery(query);
-		return Product.toProduct(rs);
+		Product p = null;
+		if(rs.next())
+			p = Product.toProduct(rs);
+		return p;
 	}
 	
 	public Product[] getProductsByPrice(int start, int end){

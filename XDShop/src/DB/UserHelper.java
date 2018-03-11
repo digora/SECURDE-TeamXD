@@ -28,6 +28,17 @@ public class UserHelper {
 		return u;
 	}
 	
+	public int getUserIdByUsername(String username)throws SQLException{
+		String query = "SELECT user_id FROM users WHERE username = '"+ username + "'";
+		System.out.println(username);
+		ResultSet rs = dbc.executeQuery(query);
+		
+		int id = -1;
+		if(rs.next()){
+			id = rs.getInt(1);
+		}
+		return id;
+	}
 	public User login(String username, String password) throws SQLException{
 		System.out.println("Logging in user " + username);
 		String query = "SELECT * FROM users WHERE username = '"+ username + "' "

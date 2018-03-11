@@ -1,6 +1,8 @@
 package Servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,7 +50,12 @@ public class ProductServlet extends HttpServlet {
 			System.out.println("getById");
 			int id = Integer.parseInt(request.getParameter("id").split("&")[0]);
 			products = new Product[1];
-			products[0] = helper.getProductById(id);
+			try {
+				products[0] = helper.getProductById(id);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}else if (param.compareToIgnoreCase("getByPrice") == 0) {
 			System.out.println("getByPrice");
 			int startPrice = Integer.parseInt(request.getParameter("start").split("&")[0]);
