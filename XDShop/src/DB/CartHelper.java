@@ -30,8 +30,12 @@ public class CartHelper {
 		dbc.updateQuery(query2);
 		int order_id;
 		try{
-			Double userBalance = dbc.executeQuery(queryBalance).getDouble("credits");
-			order_id = dbc.executeQuery(query3).getInt("MAX(order_id)");
+			ResultSet rs = dbc.executeQuery(queryBalance);
+			Double userBalance = rs.getDouble("credits");
+			
+			rs = dbc.executeQuery(query3);
+			order_id = rs.getInt("MAX(order_id)");
+			
 			Double cartTotal = 0.0;
 			String queryPrice;
 			
@@ -50,7 +54,8 @@ public class CartHelper {
 							+ c.getQty() + ")";
 					dbc.updateQuery(query5);
 					
-					int latestDetailId = dbc.executeQuery(query4).getInt("MAX(detail_id)");
+					rs = dbc.executeQuery(query4);
+					int latestDetailId = rs.getInt("MAX(detail_id)");
 					
 					String query6 = "INSERT INTO order_status(date,status,detail_id) VALUES(CURDATE(),"
 							+ "'Order Placed', "
@@ -76,7 +81,8 @@ public class CartHelper {
 		String updateStock = "";
 		try{
 			//get current stock
-			int qt = dbc.executeQuery(getQty).getInt("qty");
+			ResultSet rs = dbc.executeQuery(getQty);
+			int qt = rs.getInt("qty");
 			//check if qty is not mroe than the stock
 			if(qt>=qty){
 				//check if order alr exists
@@ -86,7 +92,6 @@ public class CartHelper {
 					//check if new qty is more than stock
 					if(qt>newqt){
 						String updateCart = "UPDATE cart SET qty = qty + " + newqt + " WHERE user_id = " + userId + " AND p_id = " + p.getP_id();
-						succ = true;
 						updateStock = "UPDATE products SET qty = qty - " + newqt + " WHERE prod_id = " + p.getP_id();
 					}
 				}else{
@@ -97,12 +102,14 @@ public class CartHelper {
 					updateStock = "UPDATE products SET qty = qty - " + qty + " WHERE prod_id = " + p.getP_id();
 					dbc.updateQuery(query);
 				}
+				dbc.updateQuery(updateStock);
 				succ = true;
 			}
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		dbc.updateQuery(updateStock);
+		
 		return succ;
 	}
 	
