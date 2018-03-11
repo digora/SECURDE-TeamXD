@@ -3,6 +3,7 @@ package Servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Objects;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -151,6 +152,35 @@ public class UserServlet extends HttpServlet {
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}
+			}else if (param.compareToIgnoreCase("edit") == 0){
+				String username = (String) request.getParameter("user").split("&")[0];
+				String newPassword = null;
+				String newFname = null;
+				String newLname = null;
+				
+				if(!(request.getParameter("newPass").split("&")[0].equalsIgnoreCase("none"))){
+					newPassword = (String) request.getParameter("newPass").split("&")[0];
+					System.out.println("Link set");
+				}
+				if(!(request.getParameter("newFname").split("&")[0].equalsIgnoreCase("none"))){
+					newFname = (String) request.getParameter("newFname").split("&")[0];
+					System.out.println("First name set");
+				}
+				if(!(request.getParameter("newLname").split("&")[0].equalsIgnoreCase("none"))){
+					newLname = (String) request.getParameter("newLname").split("&")[0];
+					System.out.println("Last name set");
+				}
+				
+				if((!Objects.isNull(newPassword))){
+					helper.editPassword(username, newPassword);
+					System.out.println("Password updated!");
+				}if((!Objects.isNull(newFname))){
+					helper.editFirstName(username, newFname);
+					System.out.println("First name updated!");
+				}if((!Objects.isNull(newLname))){
+					helper.editLastName(username, newLname);
+					System.out.println("Last name updated!");
 				}
 			}
 	}

@@ -6,7 +6,13 @@
 </head>
 <body>
 <button id ="loadUser">Load user details</button>
-<div id = "userStuff"></div>
+<label>New First Name</label>
+<input type = "text" id ="newFname"/>
+<label>New Last Name</label>
+<input type = "text" id ="newLname"/>
+<label>New Password</label>
+<input type = "password" id ="newPassword"/>
+<button id = "editUser">Edit user</button>
 </body>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
@@ -16,6 +22,36 @@
 			var user = JSON.parse(obj);
 			console.log(user);
 		});
+	});
+	$("#editUser").click(function(){
+		var username = document.cookie.split("=")[1];
+			
+		var newFname;
+		if (document.getElementById("newFname").value != "")
+			newFname = document.getElementById("newFname").value;
+		else
+			newFname = "none";
+		
+		var newLname;
+		if(document.getElementById("newLname").value != "")
+			newLname = document.getElementById("newLname").value;
+		else
+			newLname = "none";
+		
+		var newPassword;
+		if(document.getElementById("newPassword").value != "")
+			newPassword = document.getElementById("newPassword").value;
+		else
+			newPassword = "none";
+		
+		console.log(newFname + " " + newLname + " " + newPassword);
+		
+		if(newFname == "none" && newLname == "none" && newPassword == "none")
+			alert("There are errors in your form.");
+		else{
+			$.post("UserServlet?param=edit&user="+username+"&newPass="+newPassword+"&newFname="+newFname+"&newLname="+newLname);
+			console.log("User details edited");
+		}
 	});
 </script>
 </html>

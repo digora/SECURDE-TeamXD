@@ -40,6 +40,62 @@ public class UserHelper {
 		return u;
 	}
 	
+	public boolean editPassword(String username, String newPassword){
+		String query = "UPDATE users SET password = ? WHERE username = ?";
+		try{
+			
+			PreparedStatement pstmt = dbc.createPreparedStatement(query);
+			
+			pstmt.setString(1, newPassword);
+			pstmt.setString(2, username);
+			pstmt.executeUpdate();
+			pstmt.close();
+			
+			System.out.println("User password edited!");
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean editFirstName(String username, String newFname){
+		String query = "UPDATE users SET fname = ? WHERE username = ?";
+		try{
+			
+			PreparedStatement pstmt = dbc.createPreparedStatement(query);
+			
+			pstmt.setString(1, newFname);
+			pstmt.setString(2, username);
+			pstmt.executeUpdate();
+			pstmt.close();
+			
+			System.out.println("User First Name edited!");
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean editLastName(String username, String newLname){
+		String query = "UPDATE users SET lname = ? WHERE username = ?";
+		try{
+			
+			PreparedStatement pstmt = dbc.createPreparedStatement(query);
+			
+			pstmt.setString(1, newLname);
+			pstmt.setString(2, username);
+			pstmt.executeUpdate();
+			pstmt.close();
+			
+			System.out.println("User First Name edited!");
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 	public double getCredits(String username) throws SQLException {
 		String query = "SELECT credits FROM users WHERE username = '"+ username + "'";
 		ResultSet rs = dbc.executeQuery(query);
