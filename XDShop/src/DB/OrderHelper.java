@@ -23,7 +23,8 @@ public class OrderHelper {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return (Order[])orders.toArray();
+		
+		return orders.toArray(new Order[orders.size()]);
 	}
 	
 	
@@ -49,7 +50,7 @@ public class OrderHelper {
 			e.printStackTrace();
 		}
 		
-		return (Order_Details[]) od.toArray();
+		return od.toArray(new Order_Details[od.size()]);
 	}
 	
 	public void addOrderStatus(Order_Status os){
